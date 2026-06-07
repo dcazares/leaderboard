@@ -63,6 +63,14 @@
   footer { text-align:center; color:var(--muted); font-size:.86rem; margin-top:26px; }
   .stamp { color:var(--muted); font-size:.8rem; text-align:center; margin:0 0 8px; }
   .lema { margin-top:14px; font-weight:700; color:var(--ink); }
+  .weeknav input[type=radio] { display:none; }
+  .weeknav .tabs { display:flex; gap:8px; margin:0 0 16px; flex-wrap:wrap; justify-content:center; }
+  .weeknav .tab { cursor:pointer; padding:8px 16px; border-radius:999px; background:var(--card); border:1px solid var(--line); color:var(--muted); font-weight:700; font-size:.9rem; }
+  .weeknav .weekpanel { display:none; }
+  #wk2:checked ~ .panels #p-wk2{display:block}
+#wk2:checked ~ .tabs label[for="wk2"]{background:linear-gradient(90deg,var(--red),var(--blue));color:#fff;border-color:transparent}
+#wk1:checked ~ .panels #p-wk1{display:block}
+#wk1:checked ~ .tabs label[for="wk1"]{background:linear-gradient(90deg,var(--red),var(--blue));color:#fff;border-color:transparent}
 </style>
 </head>
 <body>
@@ -74,8 +82,9 @@
     <span class="prize">🏆 El premio: AirPods + iPad</span>
   </header>
   <div class="checker"></div>
-  <p class="stamp">Actualizado: 2026-06-07 12:34 (CDMX)</p>
-  <section class="card"><h2 class="track"><span class="flag">🏁</span> Cheep Cheep Beach</h2><p class="week">Pista de la semana #1</p><ol class="board">
+  
+  <div class="weeknav"><input type="radio" name="wk" id="wk2" checked><input type="radio" name="wk" id="wk1"><div class="tabs"><label class="tab" for="wk2">Semana 2</label><label class="tab" for="wk1">Semana 1</label></div><div class="panels"><section class="weekpanel" id="p-wk2"><section class="card empty"><h2 class="track"><span class="flag">🏁</span> Mario Circuit</h2><p class="week">Pista de la semana #2</p><p>¡Aún no hay tiempos! 🐢</p><p class="muted">Sé el primero: corre tu vuelta y sube la foto al chat.</p></section></section>
+<section class="weekpanel" id="p-wk1"><section class="card"><h2 class="track"><span class="flag">🏁</span> Cheep Cheep Beach</h2><p class="week">Pista de la semana #1</p><ol class="board">
 <li class="row top3"><span class="rank">🥇</span><span class="player">Decr</span><span class="time">1:55.260</span></li>
 <li class="row top3"><span class="rank">🥈</span><span class="player">Jorge</span><span class="time">1:55.596</span></li>
 <li class="row top3"><span class="rank">🥉</span><span class="player">Fernando</span><span class="time">1:56.376</span></li>
@@ -87,7 +96,7 @@
 <li class="row"><span class="rank"><span class="rank-num">9</span></span><span class="player">Aaron</span><span class="time">2:20.022</span></li>
 <li class="row"><span class="rank"><span class="rank-num">10</span></span><span class="player">David C</span><span class="time">2:23.172</span></li>
 <li class="row"><span class="rank"><span class="rank-num">11</span></span><span class="player">Ana Tere</span><span class="time">2:30.961</span></li>
-</ol></section>
+</ol></section></section></div></div>
 <section class="card pending"><h2 class="track"><span class="flag">🕐</span> Aún sin tiempo</h2><p class="week">Ya firmados — falta subir su vuelta 🏎️</p><ul class="board">
 <li class="row pendingrow"><span class="rank">·</span><span class="player">Marifer</span><span class="time">—</span></li>
 <li class="row pendingrow"><span class="rank">·</span><span class="player">Monse</span><span class="time">—</span></li>
