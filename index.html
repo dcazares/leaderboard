@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabla de posiciones · Torneo de Mario Kart 8</title>
+<meta name="description" content="Tabla de tiempos del calentamiento — Torneo de Mario Kart 8, Fiesta del 25 de julio en Mil Encinos.">
+<style>
+  :root {
+    --bg:#0b1020; --card:#141b32; --ink:#f4f6ff; --muted:#9aa6c8;
+    --line:#27314f; --accent:#ffd23f; --red:#e63946; --blue:#3a86ff; --green:#06d6a0;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;
+  }
+  .wrap { max-width:680px; margin:0 auto; padding:20px 16px 56px; }
+  header.hero { text-align:center; padding:14px 0 22px; }
+  .hero h1 { font-size:1.9rem; margin:.2em 0 .15em; letter-spacing:.3px; }
+  .hero .sub { color:var(--muted); margin:.1em 0; font-size:.98rem; }
+  .hero .prize {
+    display:inline-block; margin-top:12px; padding:6px 14px; border-radius:999px;
+    background:linear-gradient(90deg,var(--red),var(--blue)); font-weight:700; font-size:.92rem;
+  }
+  .checker {
+    height:10px; margin:16px 0 24px;
+    background-image:
+      linear-gradient(45deg,#fff 25%,transparent 25%),
+      linear-gradient(-45deg,#fff 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#fff 75%),
+      linear-gradient(-45deg,transparent 75%,#fff 75%);
+    background-size:18px 18px;
+    background-position:0 0,0 9px,9px -9px,-9px 0;
+    background-color:#000; border-radius:4px; opacity:.85;
+  }
+  .card {
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px 18px 8px; margin:0 0 18px; box-shadow:0 6px 22px rgba(0,0,0,.25);
+  }
+  .track { font-size:1.3rem; margin:0 0 2px; display:flex; align-items:center; gap:8px; }
+  .week { color:var(--accent); font-weight:700; margin:0 0 12px; font-size:.92rem; text-transform:uppercase; letter-spacing:.6px; }
+  ol.board { list-style:none; margin:0; padding:0; }
+  .row {
+    display:grid; grid-template-columns:46px 1fr auto; align-items:center;
+    gap:10px; padding:11px 8px; border-top:1px solid var(--line);
+  }
+  .row:first-child { border-top:none; }
+  .rank { font-size:1.35rem; text-align:center; }
+  .rank-num { font-size:1rem; color:var(--muted); font-weight:700; }
+  .player { font-weight:600; font-size:1.05rem; }
+  .time { font-variant-numeric:tabular-nums; font-weight:700; font-size:1.05rem; letter-spacing:.3px; }
+  .row.top3 .time { color:var(--accent); }
+  .row.top3:first-child {
+    background:linear-gradient(90deg,rgba(255,210,63,.12),transparent);
+    border-radius:10px;
+  }
+  .empty { text-align:center; padding:34px 18px; }
+  .muted { color:var(--muted); }
+  .pending .week { color:var(--muted); }
+  .pendingrow .rank, .pendingrow .player, .pendingrow .time { color:var(--muted); font-weight:600; }
+  footer { text-align:center; color:var(--muted); font-size:.86rem; margin-top:26px; }
+  .stamp { color:var(--muted); font-size:.8rem; text-align:center; margin:0 0 8px; }
+  .lema { margin-top:14px; font-weight:700; color:var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>🏁 Tabla de posiciones</h1>
+    <p class="sub">Torneo de Mario Kart 8 · El calentamiento</p>
+    <p class="sub">Fiesta del 25 de julio · Mil Encinos, Montemorelos</p>
+    <span class="prize">🏆 El premio: AirPods + iPad</span>
+  </header>
+  <div class="checker"></div>
+  <p class="stamp">Actualizado: 2026-06-07 12:34 (CDMX)</p>
+  <section class="card"><h2 class="track"><span class="flag">🏁</span> Cheep Cheep Beach</h2><p class="week">Pista de la semana #1</p><ol class="board">
+<li class="row top3"><span class="rank">🥇</span><span class="player">Decr</span><span class="time">1:55.260</span></li>
+<li class="row top3"><span class="rank">🥈</span><span class="player">Jorge</span><span class="time">1:55.596</span></li>
+<li class="row top3"><span class="rank">🥉</span><span class="player">Fernando</span><span class="time">1:56.376</span></li>
+<li class="row"><span class="rank"><span class="rank-num">4</span></span><span class="player">Daniel C</span><span class="time">1:57.116</span></li>
+<li class="row"><span class="rank"><span class="rank-num">5</span></span><span class="player">Pato</span><span class="time">2:00.611</span></li>
+<li class="row"><span class="rank"><span class="rank-num">6</span></span><span class="player">Sarah</span><span class="time">2:02.489</span></li>
+<li class="row"><span class="rank"><span class="rank-num">7</span></span><span class="player">Lucy</span><span class="time">2:15.139</span></li>
+<li class="row"><span class="rank"><span class="rank-num">8</span></span><span class="player">Mati</span><span class="time">2:18.062</span></li>
+<li class="row"><span class="rank"><span class="rank-num">9</span></span><span class="player">Aaron</span><span class="time">2:20.022</span></li>
+<li class="row"><span class="rank"><span class="rank-num">10</span></span><span class="player">David C</span><span class="time">2:23.172</span></li>
+<li class="row"><span class="rank"><span class="rank-num">11</span></span><span class="player">Ana Tere</span><span class="time">2:30.961</span></li>
+</ol></section>
+<section class="card pending"><h2 class="track"><span class="flag">🕐</span> Aún sin tiempo</h2><p class="week">Ya firmados — falta subir su vuelta 🏎️</p><ul class="board">
+<li class="row pendingrow"><span class="rank">·</span><span class="player">Marifer</span><span class="time">—</span></li>
+<li class="row pendingrow"><span class="rank">·</span><span class="player">Monse</span><span class="time">—</span></li>
+<li class="row pendingrow"><span class="rank">·</span><span class="player">Carlos</span><span class="time">—</span></li>
+<li class="row pendingrow"><span class="rank">·</span><span class="player">Zuly</span><span class="time">—</span></li>
+<li class="row pendingrow"><span class="rank">·</span><span class="player">Renata</span><span class="time">—</span></li>
+<li class="row pendingrow"><span class="rank">·</span><span class="player">Alfonso</span><span class="time">—</span></li>
+<li class="row pendingrow"><span class="rank">·</span><span class="player">Luis Moran</span><span class="time">—</span></li>
+</ul></section>
+  <footer>
+    <p>Sube la foto de tu mejor vuelta al chat del torneo y aparece en la tabla. 📸🐢</p>
+    <p class="lema">A entrenar como Goku, compadre. 🐉🔥</p>
+  </footer>
+</div>
+</body>
+</html>
