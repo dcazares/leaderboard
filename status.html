@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipeline status · MK8 Torneo</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg:#0b1020; --card:#141b32; --ink:#f4f6ff; --muted:#9aa6c8;
+    --line:#27314f; --accent:#ffd23f; --green:#06d6a0; --red:#e63946; --blue:#3a86ff;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif; line-height:1.45; }
+  .wrap { max-width:680px; margin:0 auto; padding:24px 16px 56px; }
+  h1 { font-size:1.5rem; margin:.1em 0 .1em; }
+  .sub { color:var(--muted); font-size:.92rem; margin:0 0 18px; }
+  .pill { display:inline-flex; align-items:center; gap:9px; padding:9px 16px; border-radius:999px;
+    font-weight:800; font-size:1.02rem; background:var(--card); border:1px solid var(--line); }
+  .dot { width:12px; height:12px; border-radius:50%; background:#06d6a0; box-shadow:0 0 10px #06d6a0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px; margin:18px 0; box-shadow:0 6px 22px rgba(0,0,0,.25); }
+  .notes { list-style:none; margin:14px 0 0; padding:0; }
+  .notes li { color:var(--muted); padding:3px 0; font-size:.95rem; }
+  .notes li::before { content:"•"; color:#06d6a0; margin-right:8px; }
+  .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .metric { background:#0e1530; border:1px solid var(--line); border-radius:12px; padding:14px 12px; text-align:center; }
+  .mv { font-size:1.7rem; font-weight:800; font-variant-numeric:tabular-nums; }
+  .ml { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.5px; margin-top:4px; }
+  .track { font-size:1.2rem; margin:0 0 2px; }
+  .week { color:var(--accent); font-weight:700; font-size:.85rem; text-transform:uppercase; letter-spacing:.6px; }
+  .bars { display:flex; align-items:flex-end; gap:8px; height:90px; margin-top:6px; }
+  .bar { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; }
+  .barfill { width:70%; background:linear-gradient(180deg,var(--accent),var(--blue)); border-radius:4px 4px 0 0; }
+  .barval { font-size:.72rem; color:var(--ink); margin-top:3px; font-variant-numeric:tabular-nums; }
+  .barlbl { font-size:.7rem; color:var(--muted); }
+  .hd { font-size:.8rem; text-transform:uppercase; letter-spacing:.6px; color:var(--muted); margin:0 0 12px; }
+  footer { text-align:center; color:var(--muted); font-size:.82rem; margin-top:24px; }
+  a { color:var(--blue); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🏎️ Pipeline status</h1>
+    <p class="sub">MK8 tournament · WhatsApp → leaderboard auto-publish</p>
+
+    <div class="pill"><span class="dot"></span>Healthy</div>
+
+    <div class="card">
+      <ul class="notes">
+        <li>auto-publishing on schedule; nothing waiting</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="hd">Last 24 hours</p>
+      <div class="metrics">
+        <div class="metric"><div class="mv">1</div><div class="ml">Runs</div></div>
+        <div class="metric"><div class="mv">0</div><div class="ml">Times added</div></div>
+        <div class="metric"><div class="mv">0</div><div class="ml">Flagged</div></div>
+        <div class="metric"><div class="mv">0</div><div class="ml">Errors</div></div>
+        <div class="metric"><div class="mv">0</div><div class="ml">Parked now</div></div>
+        <div class="metric"><div class="mv">0 ✓</div><div class="ml">Last exit</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="hd">Times added · last 7 days</p>
+      <div class="bars"><div class="bar"><div class="barfill" style="height:2px" title="2026-06-16: 0 accepted / 0 runs"></div><div class="barval">0</div><div class="barlbl">Tue</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-06-17: 0 accepted / 0 runs"></div><div class="barval">0</div><div class="barlbl">Wed</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-06-18: 0 accepted / 0 runs"></div><div class="barval">0</div><div class="barlbl">Thu</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-06-19: 0 accepted / 0 runs"></div><div class="barval">0</div><div class="barlbl">Fri</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-06-20: 0 accepted / 0 runs"></div><div class="barval">0</div><div class="barlbl">Sat</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-06-21: 0 accepted / 0 runs"></div><div class="barval">0</div><div class="barlbl">Sun</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-06-22: 0 accepted / 1 runs"></div><div class="barval">0</div><div class="barlbl">Mon</div></div></div>
+    </div>
+
+    <div class="card">
+      <div class="track">🏁 Mario Circuit (Copa Flor)</div><div class="week">Current · Week 2</div>
+      <div class="metrics" style="margin-top:14px">
+        <div class="metric"><div class="mv">42</div><div class="ml">Board entries</div></div>
+        <div class="metric"><div class="mv">11 min ago</div><div class="ml">Last run</div></div>
+        <div class="metric"><div class="mv">every 30m</div><div class="ml">Schedule</div></div>
+      </div>
+      <p class="sub" style="margin:14px 0 0">By week · Wk 1: 13 · Wk 2: 29</p>
+    </div>
+
+    <footer>
+      Generated 2026-06-22 20:11 PDT · <a href="./">leaderboard →</a>
+    </footer>
+  </div>
+</body>
+</html>
