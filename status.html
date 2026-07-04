@@ -18,12 +18,12 @@
   .sub { color:var(--muted); font-size:.92rem; margin:0 0 18px; }
   .pill { display:inline-flex; align-items:center; gap:9px; padding:9px 16px; border-radius:999px;
     font-weight:800; font-size:1.02rem; background:var(--card); border:1px solid var(--line); }
-  .dot { width:12px; height:12px; border-radius:50%; background:#06d6a0; box-shadow:0 0 10px #06d6a0; }
+  .dot { width:12px; height:12px; border-radius:50%; background:#ffd23f; box-shadow:0 0 10px #ffd23f; }
   .card { background:var(--card); border:1px solid var(--line); border-radius:16px;
     padding:18px; margin:18px 0; box-shadow:0 6px 22px rgba(0,0,0,.25); }
   .notes { list-style:none; margin:14px 0 0; padding:0; }
   .notes li { color:var(--muted); padding:3px 0; font-size:.95rem; }
-  .notes li::before { content:"•"; color:#06d6a0; margin-right:8px; }
+  .notes li::before { content:"•"; color:#ffd23f; margin-right:8px; }
   .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
   .metric { background:#0e1530; border:1px solid var(--line); border-radius:12px; padding:14px 12px; text-align:center; }
   .mv { font-size:1.7rem; font-weight:800; font-variant-numeric:tabular-nums; }
@@ -45,11 +45,11 @@
     <h1>🏎️ Pipeline status</h1>
     <p class="sub">MK8 tournament · WhatsApp → leaderboard auto-publish</p>
 
-    <div class="pill"><span class="dot"></span>Healthy</div>
+    <div class="pill"><span class="dot"></span>Check in</div>
 
     <div class="card">
       <ul class="notes">
-        <li>auto-publishing on schedule; nothing waiting</li>
+        <li>1 item(s) parked for your review</li>
       </ul>
     </div>
 
@@ -57,31 +57,31 @@
       <p class="hd">Last 24 hours</p>
       <div class="metrics">
         <div class="metric"><div class="mv">48</div><div class="ml">Runs</div></div>
-        <div class="metric"><div class="mv">0</div><div class="ml">Times added</div></div>
-        <div class="metric"><div class="mv">0</div><div class="ml">Flagged</div></div>
+        <div class="metric"><div class="mv" style="color:var(--green)">1</div><div class="ml">Times added</div></div>
+        <div class="metric"><div class="mv">1</div><div class="ml">Flagged</div></div>
         <div class="metric"><div class="mv">0</div><div class="ml">Errors</div></div>
-        <div class="metric"><div class="mv">0</div><div class="ml">Parked now</div></div>
+        <div class="metric"><div class="mv" style="color:var(--accent)">1</div><div class="ml">Parked now</div></div>
         <div class="metric"><div class="mv">0 ✓</div><div class="ml">Last exit</div></div>
       </div>
     </div>
 
     <div class="card">
       <p class="hd">Times added · last 7 days</p>
-      <div class="bars"><div class="bar"><div class="barfill" style="height:2px" title="2026-06-27: 0 accepted / 48 runs"></div><div class="barval">0</div><div class="barlbl">Sat</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-06-28: 0 accepted / 48 runs"></div><div class="barval">0</div><div class="barlbl">Sun</div></div><div class="bar"><div class="barfill" style="height:20px" title="2026-06-29: 1 accepted / 48 runs"></div><div class="barval">1</div><div class="barlbl">Mon</div></div><div class="bar"><div class="barfill" style="height:40px" title="2026-06-30: 2 accepted / 48 runs"></div><div class="barval">2</div><div class="barlbl">Tue</div></div><div class="bar"><div class="barfill" style="height:40px" title="2026-07-01: 2 accepted / 48 runs"></div><div class="barval">2</div><div class="barlbl">Wed</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-07-02: 0 accepted / 48 runs"></div><div class="barval">0</div><div class="barlbl">Thu</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-07-03: 0 accepted / 16 runs"></div><div class="barval">0</div><div class="barlbl">Fri</div></div></div>
+      <div class="bars"><div class="bar"><div class="barfill" style="height:2px" title="2026-06-28: 0 accepted / 48 runs"></div><div class="barval">0</div><div class="barlbl">Sun</div></div><div class="bar"><div class="barfill" style="height:20px" title="2026-06-29: 1 accepted / 48 runs"></div><div class="barval">1</div><div class="barlbl">Mon</div></div><div class="bar"><div class="barfill" style="height:40px" title="2026-06-30: 2 accepted / 48 runs"></div><div class="barval">2</div><div class="barlbl">Tue</div></div><div class="bar"><div class="barfill" style="height:40px" title="2026-07-01: 2 accepted / 48 runs"></div><div class="barval">2</div><div class="barlbl">Wed</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-07-02: 0 accepted / 48 runs"></div><div class="barval">0</div><div class="barlbl">Thu</div></div><div class="bar"><div class="barfill" style="height:20px" title="2026-07-03: 1 accepted / 48 runs"></div><div class="barval">1</div><div class="barlbl">Fri</div></div><div class="bar"><div class="barfill" style="height:2px" title="2026-07-04: 0 accepted / 16 runs"></div><div class="barval">0</div><div class="barlbl">Sat</div></div></div>
     </div>
 
     <div class="card">
       <div class="track">🏁 Thwomp Ruins</div><div class="week">Current · Week 5</div>
       <div class="metrics" style="margin-top:14px">
-        <div class="metric"><div class="mv">53</div><div class="ml">Board entries</div></div>
+        <div class="metric"><div class="mv">54</div><div class="ml">Board entries</div></div>
         <div class="metric"><div class="mv">24 min ago</div><div class="ml">Last run</div></div>
         <div class="metric"><div class="mv">every 30m</div><div class="ml">Schedule</div></div>
       </div>
-      <p class="sub" style="margin:14px 0 0">By week · Wk 1: 14 · Wk 2: 25 · Wk 3: 4 · Wk 4: 6 · Wk 5: 4</p>
+      <p class="sub" style="margin:14px 0 0">By week · Wk 1: 14 · Wk 2: 25 · Wk 3: 4 · Wk 4: 6 · Wk 5: 5</p>
     </div>
 
     <footer>
-      Generated 2026-07-03 08:00 PDT · <a href="./">leaderboard →</a>
+      Generated 2026-07-04 08:00 PDT · <a href="./">leaderboard →</a>
     </footer>
   </div>
 </body>
