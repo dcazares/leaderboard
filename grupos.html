@@ -205,8 +205,8 @@ const BRACKET = {
     return d;
   }
   var L = document.getElementById("wc-left"), R = document.getElementById("wc-right");
-  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[2]));
-  R.appendChild(card(BRACKET.qf[1])); R.appendChild(card(BRACKET.qf[3]));
+  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[1]));
+  R.appendChild(card(BRACKET.qf[2])); R.appendChild(card(BRACKET.qf[3]));
   fill(document.getElementById("wc-final"), "🏆 Gran Final",
        BRACKET.qf.map(function (q) { return "Ganador " + q.id; }),
        BRACKET.qf.map(function (q) { return q.winner; }),
