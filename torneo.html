@@ -38,10 +38,11 @@
   .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
   .chip{
     background:var(--card);border:1px solid var(--line);border-radius:999px;
-    padding:6px 14px;font-size:.88rem;font-weight:600;
+    padding:6px 14px;font-size:.88rem;font-weight:600;color:var(--ink);
   }
   .chip b{color:var(--accent);font-weight:700}
-  .chip.tbd{border-style:dashed;color:var(--muted)}
+  a.chip{text-decoration:none}
+  a.chip:hover,a.chip:focus-visible{border-color:var(--accent)}
   section{margin-top:40px}
   h2{
     font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
@@ -49,13 +50,11 @@
   }
   p{margin:.5em 0;max-width:62ch}
   .lead{color:var(--muted)}
-  /* premios */
   .prize{
     background:linear-gradient(90deg,rgba(255,210,63,.12),transparent);
     border:1px solid var(--line);border-left:4px solid var(--accent);
     border-radius:10px;padding:14px 18px;font-size:1rem;
   }
-  /* llegada timeline */
   .times{display:grid;gap:0;margin:0;padding:0;list-style:none}
   .times li{
     display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:baseline;
@@ -68,7 +67,6 @@
   }
   .t.cut{color:var(--red)}
   .times small{display:block;color:var(--muted)}
-  /* formato steps */
   .steps{display:grid;gap:12px;margin:0;padding:0;list-style:none;counter-reset:paso}
   .steps li{
     counter-increment:paso;background:var(--card);border:1px solid var(--line);
@@ -80,76 +78,16 @@
     font-weight:800;display:grid;place-items:center;font-size:.95rem;
   }
   .steps b{color:var(--accent)}
+  .steps a{color:var(--blue);font-weight:600;text-decoration:none}
+  .steps a:hover,.steps a:focus-visible{text-decoration:underline}
   .hokage{border-left:4px solid var(--green)}
   .hokage::before{background:var(--green)}
-  /* grupos */
-  .groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px}
-  .group{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-  .group h3{
-    margin:0;padding:8px 12px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
-    background:var(--card2);border-bottom:1px solid var(--line);color:var(--accent);
-    display:flex;justify-content:space-between;align-items:baseline;
-  }
-  .group h3 small{color:var(--muted);letter-spacing:0;text-transform:none;font-weight:400}
-  .group ul{list-style:none;margin:0;padding:10px 12px;display:grid;gap:6px}
-  .group li{font-size:.94rem}
-  .group li.top{font-weight:700}
-  .group li.top::after{content:" ★";color:var(--accent);font-size:.8em}
-  /* bracket */
-  .bracket{display:grid;gap:10px}
-  .stage{
-    background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;
-    display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;
-  }
-  .stage .tag{font-weight:800;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
-  .stage.final .tag{color:var(--accent)}
-  .stage.final{border-color:var(--accent);background:linear-gradient(90deg,rgba(255,210,63,.10),var(--card))}
-  .stage p{margin:0;font-size:.94rem;color:var(--ink)}
-  .stage p span{color:var(--muted)}
-  .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
-  /* settings */
   .settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:0;padding:0;list-style:none}
   .settings li{
     background:var(--card);border:1px solid var(--line);border-radius:8px;
     padding:10px 14px;font-size:.92rem;
   }
   .settings b{color:var(--accent)}
-  /* bracket en vivo */
-  .wc{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:14px;align-items:center}
-  .wc-col{display:grid;gap:14px}
-  .wc-center{display:grid;gap:14px}
-  .bcard{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-  .bcard h4{
-    margin:0;padding:7px 12px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
-    background:var(--card2);border-bottom:1px solid var(--line);color:var(--blue);font-weight:800;
-  }
-  .bfinal>h4{color:var(--accent)}
-  .bfinal{border-color:var(--accent);box-shadow:0 0 0 1px rgba(255,210,63,.25)}
-  .brev>h4{color:var(--green)}
-  .slot{
-    padding:7px 12px;border-bottom:1px dashed var(--line);font-size:.92rem;
-    color:var(--muted);font-style:italic;
-  }
-  .slot:last-child{border-bottom:none}
-  .slot.filled{color:var(--ink);font-style:normal;font-weight:600}
-  .slot.win{
-    color:var(--accent);font-weight:800;
-    background:linear-gradient(90deg,rgba(255,210,63,.14),transparent);
-  }
-  .slot.win::after{content:" ✔";font-size:.85em}
-  .champ{
-    text-align:center;border:1px dashed var(--line);border-radius:10px;padding:12px;
-    color:var(--muted);font-size:.92rem;
-  }
-  .champ.crowned{
-    border:1px solid var(--accent);background:linear-gradient(180deg,rgba(255,210,63,.16),var(--card));
-    color:var(--ink);font-size:1.05rem;
-  }
-  .champ.crowned b{color:var(--accent);font-size:1.25rem;display:block}
-  @media (max-width:640px){
-    .wc{grid-template-columns:1fr}
-    .wc-center{order:3}
-  }
   footer{
     margin-top:52px;padding-top:18px;border-top:1px solid var(--line);
     color:var(--muted);font-size:.9rem;
@@ -168,19 +106,25 @@
   <header class="hero">
     <span class="kicker">Después de 8 semanas de time trials…</span>
     <h1>GRAN TORNEO <span class="gold">MK8</span> 2026</h1>
-    <p class="lead">30 corredores · 8 grupos · una gran final. Todos los inscritos ya tienen lugar — aquí están las reglas, los grupos y el camino al trofeo.</p>
+    <p class="lead">Las reglas y qué esperar, en una página. Tu grupo y el bracket viven en sus propias páginas 👇</p>
     <div class="meta">
       <span class="chip">📅 <b>Sábado 25 de julio</b></span>
       <span class="chip">🕑 Arrancamos <b>2:00 PM</b></span>
-      <span class="chip">🎮 3 Switch · 3 TVs</span>
+      <span class="chip">📍 Ubicación: en el grupo de WhatsApp</span>
+    </div>
+    <div class="meta">
+      <a class="chip" href="/grupos">👥 <b>Tu grupo</b></a>
+      <a class="chip" href="/bracket">🏁 <b>Bracket en vivo</b> (el sábado)</a>
+      <a class="chip" href="https://mk8tabla2026.decrgandalf.com">⏱️ Tabla de tiempos</a>
     </div>
   </header>
 
   <section>
-    <h2>El premio</h2>
+    <h2>Lo esencial</h2>
     <div class="prize">
-      🏆 <b>AirPods + iPad.</b> El campeón del torneo escoge primero; el <b>Hokage campeón del Relevo</b> se lleva el otro. Dos caminos reales a un premio real.
+      🏆 <b>AirPods + iPad.</b> El campeón del torneo escoge primero; el Hokage campeón del Relevo se lleva el otro. Dos caminos reales a un premio real — y todos corren.
     </div>
+    <p class="lead" style="margin-top:12px">¿Primera vez en Mario Kart? Tranqui: hay tutorial de 3 minutos al arrancar, se prestan controles, y quedar fuera solo significa más carne asada, alberca y N64. Lo único imperdonable es llegar tarde.</p>
   </section>
 
   <section>
@@ -188,39 +132,24 @@
     <ul class="times">
       <li>
         <span class="t">2:00 PM</span>
-        <div>Registro. Llega antes: agarra control, practica, acomódate en tu estación.
+        <div>Registro. Llega antes: agarra control, practica, ubica tu estación.
           <small>Trae tu control si tienes — hay Joy-Cons, pero los buenos vuelan.</small></div>
       </li>
       <li>
         <span class="t cut">2:15 PM</span>
-        <div><b>Se cierra la lista.</b> Si no llegaste, tu grupo corre sin ti — sin excepciones, hay premio en juego.
-          <small>¿Traes a alguien más? Que llegue antes del corte y lo acomodamos.</small></div>
-      </li>
-      <li>
-        <span class="t">2:20 PM</span>
-        <div>Tutorial de 3 minutos + sorteo de copas en vivo. Nadie pierde por un menú.</div>
+        <div><b>Se cierra la lista.</b> Si no llegaste, tu grupo corre sin ti — sin excepciones, hay premio en juego.</div>
       </li>
       <li>
         <span class="t">2:30 PM</span>
-        <div>Copas de grupo — tanda 1: <b>A · B · C</b></div>
-      </li>
-      <li>
-        <span class="t">3:00 PM</span>
-        <div>Copas de grupo — tanda 2: <b>D · E · F</b></div>
-      </li>
-      <li>
-        <span class="t">3:30 PM</span>
-        <div>Copas de grupo — tanda 3: <b>G · H</b>
-          <small>Estación libre + los eliminados: N64 free play.</small></div>
+        <div>Copas de grupo, en 3 tandas <small>2:30 A·B·C — 3:00 D·E·F — 3:30 G·H</small></div>
       </li>
       <li>
         <span class="t">4:00 PM</span>
-        <div>Cuartos de final: <b>QF1 · QF2 · QF3</b>
-          <small>Mientras: se suman puntos de grupos y se anuncian los Hokages y sus villas.</small></div>
+        <div>Cuartos de final <small>Y se anuncian los Hokages y sus villas.</small></div>
       </li>
       <li>
         <span class="t">4:30 PM</span>
-        <div><b>QF4</b> y <b>Relevo Hokage</b> en paralelo</div>
+        <div>Último cuarto de final y <b>Relevo Hokage</b>, en paralelo</div>
       </li>
       <li>
         <span class="t">5:00 PM</span>
@@ -230,36 +159,23 @@
   </section>
 
   <section>
-    <h2>El formato</h2>
+    <h2>Cómo se juega</h2>
     <ul class="steps">
-      <li><b>Grand Prix de grupo — una copa completa (4 carreras).</b> 150cc, items ON, con CPUs (carreras de 12). La copa se sortea <b>en vivo en la mesa</b>: nadie la conoce antes. <b>Los 2 primeros de cada grupo avanzan.</b></li>
-      <li><b>Cuartos de final.</b> Los 16 clasificados corren 4 copas de 4 — cada una cruza <b>1º de un grupo con 2º de otros</b> (nunca contra tu mismo grupo). El ganador de cada copa pasa a la final.</li>
-      <li><b>Gran final.</b> 4 corredores, una sola pantalla, todos mirando. El ganador escoge premio.</li>
-      <li class="hokage"><b>Relevo Hokage 🍃 — la segunda chance, por equipos.</b> Los 4 puntajes más bajos <b>entre los eliminados</b> se vuelven Hokages, cada uno con un compañero, y corren su propio Grand Prix en relevos. El Hokage ganador se lleva <b>el otro premio</b>. Reglas completas abajo — dos finales, dos premios, nadie se queda fuera.</li>
+      <li><b>Fase de grupos.</b> Tu grupo de 4 corre <b>una copa completa</b> (Grand Prix de 4 carreras) — la copa se sortea en vivo en la mesa. <b>Los 2 primeros avanzan.</b> <a href="/grupos">Busca tu grupo aquí →</a></li>
+      <li><b>Cuartos de final.</b> Los 16 que avanzan corren 4 copas de 4, cruzadas para que no repitas contra tu propio grupo. <b>Solo el ganador</b> de cada copa pasa.</li>
+      <li><b>Gran final.</b> Los 4 ganadores, una sola pantalla, todos mirando. El campeón escoge premio.</li>
     </ul>
   </section>
 
-  <section>
-    <h2>Los grupos</h2>
-    <p class="lead">Sembrados <b>solo con los tiempos de los time trials</b> — la ★ marca a quien registró tiempo en los time trials. Los grupos G y H son de 3; con los CPUs siguen siendo carreras completas.</p>
-    <div class="groups">
-      <div class="group"><h3>Grupo A</h3><ul>
-        <li class="top">Jorge</li><li>Alfonso</li><li>Carlos</li><li>Luis Jaime Coss</li></ul></div>
-      <div class="group"><h3>Grupo B</h3><ul>
-        <li class="top">Daniel (Decr)</li><li>Marifer</li><li>Zully</li><li>Qi Pan</li></ul></div>
-      <div class="group"><h3>Grupo C</h3><ul>
-        <li class="top">Daniel Celestino</li><li class="top">Ana Tere</li><li>René</li><li>Jimena</li></ul></div>
-      <div class="group"><h3>Grupo D</h3><ul>
-        <li class="top">Fernando Guajardo</li><li class="top">Renata</li><li>Fernando Coss</li><li>Rubi</li></ul></div>
-      <div class="group"><h3>Grupo E</h3><ul>
-        <li class="top">Sarah</li><li class="top">David Celestino</li><li>Sebastián Coss</li><li>Marcelo</li></ul></div>
-      <div class="group"><h3>Grupo F</h3><ul>
-        <li class="top">Pato</li><li class="top">Aarón</li><li>Eduardo Coss</li><li>Miguelito</li></ul></div>
-      <div class="group"><h3>Grupo G <small>de 3</small></h3><ul>
-        <li class="top">Luis Morán</li><li class="top">Mati</li><li>Sofía</li></ul></div>
-      <div class="group"><h3>Grupo H <small>de 3</small></h3><ul>
-        <li class="top">Monse</li><li class="top">Lucy</li><li>Joel</li></ul></div>
-    </div>
+  <section id="relevo-hokage">
+    <h2>El Relevo Hokage 🍃</h2>
+    <p class="lead">El espíritu: <b>que la nueva generación se levante</b>. Los chavos con menos puntos no quedan fuera — hacen equipo con un veterano y van por el segundo premio.</p>
+    <ul class="steps">
+      <li class="hokage"><b>Cuatro villas.</b> Al terminar los grupos, los 4 chavos eliminados con menos puntos se vuelven <b>Hokages</b> de las villas Hoja 🍃 · Arena 🏜️ · Niebla 🌫️ · Nube ⛅. Cada uno hace <b>equipo</b> con un veterano eliminado — las parejas se asignan solas (el mejor veterano con el Hokage de menos puntos), pero el Hokage puede escoger a otro.</li>
+      <li class="hokage"><b>Una copa en relevos.</b> Grand Prix normal: <b>el Hokage corre las carreras 1 y 2, y su compañero cierra la copa con la 3 y la 4.</b> Mismo control, mismos puntos — el equipo suma junto.</li>
+      <li class="hokage"><b>Los premios.</b> En la villa ganadora, el <b>Hokage se lleva el segundo premio</b> y su compañero escoge un <b>Hot Wheels de Mario Kart</b>. Empate exacto: una carrera extra lo define, la corre el Hokage.</li>
+    </ul>
+    <p class="lead">El organizador tiene la última palabra: quién cuenta como nueva generación, parejas y casos raros.</p>
   </section>
 
   <section>
@@ -272,91 +188,11 @@
     </ul>
   </section>
 
-  <section id="relevo-hokage">
-    <h2>El Relevo Hokage 🍃</h2>
-    <p class="lead">El espíritu Hokage: <b>que la nueva generación se levante</b>. Cuatro <b>villas</b>, cada una con un Hokage de los chavos y un veterano que lo protege — un solo control que cambia de manos a media copa.</p>
-    <ul class="steps">
-      <li><b>Los Hokages (~4:00).</b> Al cerrar los grupos se suman los puntos de todos los <b>eliminados</b>. Los <b>4 puntajes más bajos de la nueva generación</b> son los Hokages de las villas <b>Hoja 🍃 · Arena 🏜️ · Niebla 🌫️ · Nube ⛅</b>.</li>
-      <li><b>Las parejas.</b> Automático: los <b>4 mejores eliminados</b> son los compañeros — el mejor protege al Hokage más bajo, y así en orden. ¿Prefieres a otro? Cada Hokage puede <b>cambiar su compañero</b> por cualquier otro eliminado.</li>
-      <li><b>La copa (4:30).</b> Grand Prix normal, las 4 villas + CPUs. <b>El Hokage maneja las carreras 1 y 2; el compañero, la 3 y la 4.</b> El control se pasa en la pantalla de resultados y los puntos se suman solos.</li>
-      <li class="hokage"><b>Los premios.</b> La villa con más puntos gana: su <b>Hokage se lleva el segundo premio</b>, y su compañero escoge un <b>Hot Wheels de Mario Kart</b> de la colección del organizador. Empate exacto: una carrera de desempate, manejada por el Hokage.</li>
-    </ul>
-    <p class="lead">Nadie corre en dos villas, solo juegan quienes corrieron grupos, y el organizador tiene la última palabra: quién cuenta como nueva generación, Hokages y parejas (no-shows, empates raros o casos de trampa).</p>
-  </section>
-
-  <section id="bracket-vivo">
-    <h2>El bracket — en vivo 🏁</h2>
-    <p class="lead">El sábado 25 este bracket se va llenando conforme caigan los resultados. Los 2 primeros de cada grupo toman su lugar en cuartos; el ganador de cada copa avanza al centro.</p>
-    <div class="wc">
-      <div class="wc-col" id="wc-left"></div>
-      <div class="wc-center">
-        <div class="bcard bfinal" id="wc-final"></div>
-        <div class="champ" id="wc-champ"></div>
-        <div class="bcard brev" id="wc-rev"></div>
-      </div>
-      <div class="wc-col" id="wc-right"></div>
-    </div>
-  </section>
-
   <footer>
     <p>⏱️ La semana 8 (<b>Mount Wario</b>) cierra el mismo sábado 25 — última chance de subir tiempo y presumir en la <a href="https://mk8tabla2026.decrgandalf.com">tabla de posiciones</a> antes del torneo.</p>
+    <p>👥 <a href="/grupos">Los grupos</a> · 🏁 <a href="/bracket">El bracket en vivo</a></p>
   </footer>
 </div>
-
-<script>
-/* ============ DÍA DEL TORNEO: los resultados se llenan AQUÍ ============
-   - Cuando un grupo termina: escribe los nombres en `names` de cada QF donde
-     ese grupo tiene lugar (el orden corresponde a los placeholders `ph`).
-   - Cuando termina una copa de cuartos: pon `winner` con el nombre exacto.
-     El ganador aparece solo en la final.
-   - Relevo Hokage: en `names` pon cada villa como "Hokage + compañero"
-     (mismo orden que las villas Hoja/Arena/Niebla/Nube); `winner` = esa
-     misma cadena de la villa ganadora.
-   - Al final: pon `champion`. Guardar + publicar y listo.               */
-const BRACKET = {
-  qf: [
-    { id: "QF1", ph: ["1º de A", "2º de C", "1º de F", "2º de H"], names: [null, null, null, null], winner: null },
-    { id: "QF2", ph: ["1º de B", "2º de D", "1º de E", "2º de G"], names: [null, null, null, null], winner: null },
-    { id: "QF3", ph: ["1º de C", "2º de A", "1º de H", "2º de F"], names: [null, null, null, null], winner: null },
-    { id: "QF4", ph: ["1º de D", "2º de B", "1º de G", "2º de E"], names: [null, null, null, null], winner: null }
-  ],
-  champion: null,
-  revancha: { ph: ["Villa de la Hoja 🍃", "Villa de la Arena 🏜️", "Villa de la Niebla 🌫️", "Villa de la Nube ⛅"], names: [null, null, null, null], winner: null }
-};
-/* ======================= (no editar de aquí abajo) ==================== */
-(function () {
-  function fill(el, title, phs, names, winner) {
-    var h = "<h4>" + title + "</h4>";
-    for (var i = 0; i < phs.length; i++) {
-      var n = names[i], cls = "slot" + (n ? " filled" : "") + (n && n === winner ? " win" : "");
-      h += '<div class="' + cls + '">' + (n || phs[i]) + "</div>";
-    }
-    el.innerHTML = h;
-  }
-  function card(q) {
-    var d = document.createElement("div");
-    d.className = "bcard";
-    fill(d, q.id, q.ph, q.names, q.winner);
-    return d;
-  }
-  var L = document.getElementById("wc-left"), R = document.getElementById("wc-right");
-  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[2]));
-  R.appendChild(card(BRACKET.qf[1])); R.appendChild(card(BRACKET.qf[3]));
-  fill(document.getElementById("wc-final"), "🏆 Gran Final",
-       BRACKET.qf.map(function (q) { return "Ganador " + q.id; }),
-       BRACKET.qf.map(function (q) { return q.winner; }),
-       BRACKET.champion);
-  var champ = document.getElementById("wc-champ");
-  if (BRACKET.champion) {
-    champ.className = "champ crowned";
-    champ.innerHTML = "👑 CAMPEÓN <b>" + BRACKET.champion + "</b>";
-  } else {
-    champ.textContent = "👑 Campeón: por definirse el sábado 25…";
-  }
-  var rv = BRACKET.revancha;
-  fill(document.getElementById("wc-rev"), "🍃 Relevo Hokage", rv.ph, rv.names, rv.winner);
-})();
-</script>
 
 </body>
 </html>
