@@ -53,7 +53,11 @@
   }
   .group h3 small{color:var(--muted);letter-spacing:0;text-transform:none;font-weight:400}
   .group ul{list-style:none;margin:0;padding:10px 12px;display:grid;gap:6px}
-  .group li{font-size:.94rem;display:flex;justify-content:space-between;gap:8px;align-items:baseline;border-radius:6px;padding:2px 6px;margin:-2px -6px}
+  .group li{font-size:.94rem;display:flex;gap:8px;align-items:baseline;border-radius:6px;padding:2px 6px;margin:-2px -6px}
+  .group li .nm{flex:1}
+  .group li .pos{color:var(--muted);font-weight:800;font-variant-numeric:tabular-nums;min-width:1.4em}
+  .group li.adv{background:linear-gradient(90deg,rgba(6,214,160,.16),transparent)}
+  .group li.adv .pos{color:var(--green)}
   .group li.star .nm{font-weight:700}
   .group li.star .nm::after{content:" ★";color:var(--accent);font-size:.8em}
   .pts{color:var(--accent);font-weight:800;font-variant-numeric:tabular-nums}
@@ -143,7 +147,10 @@
 <script>
 /* ============ DÍA DEL TORNEO: los resultados se llenan AQUÍ ============
    PUNTOS DE GRUPO: en GRUPOS, cambia el tercer valor de cada jugador
-     (null -> puntos de su copa, p.ej. ["Jorge", true, 42]).
+     (null -> puntos de su copa, p.ej. ["Jorge", true, 42]). Cuando TODOS
+     los del grupo tienen puntos, la tarjeta se ordena sola, numera 1º-4º
+     y pinta de verde a los 2 que avanzan. Empate de puntos: el juego lo
+     desempata — pon arriba en el array a quien quedó arriba en pantalla.
    BRACKET:
    - Grupo terminado: escribe los nombres en `names` de cada QF donde ese
      grupo tiene lugar (el orden corresponde a los placeholders `ph`).
@@ -181,10 +188,18 @@ const BRACKET = {
     var d = document.createElement("div");
     d.className = "group";
     d.dataset.group = g.id;
-    var h = "<h3>Grupo " + g.id + "<small>" + (g.players.length < 4 ? "de " + g.players.length + " · " : "") + TANDA[g.id] + " PM</small></h3><ul>";
-    g.players.forEach(function (p) {
-      h += '<li class="' + (p[1] ? "star" : "") + '" data-name="' + p[0] + '"><span class="nm">' + p[0] + "</span>" +
-           (p[2] != null ? '<span class="pts">' + p[2] + " pts</span>" : "") + "</li>";
+    var scored = g.players.filter(function (p) { return p[2] != null; });
+    var unscored = g.players.filter(function (p) { return p[2] == null; });
+    var complete = unscored.length === 0;
+    var list = scored.slice().sort(function (a, b) { return b[2] - a[2]; }).concat(unscored);
+    var label = complete ? "final ✓" : (g.players.length < 4 ? "de " + g.players.length + " · " : "") + TANDA[g.id] + " PM";
+    var h = "<h3>Grupo " + g.id + "<small>" + label + "</small></h3><ul>";
+    list.forEach(function (p, i) {
+      var adv = complete && i < 2;
+      h += '<li class="' + (p[1] ? "star" : "") + (adv ? " adv" : "") + '">' +
+           (complete ? '<span class="pos">' + (i + 1) + "º</span>" : "") +
+           '<span class="nm">' + p[0] + "</span>" +
+           (p[2] != null ? '<span class="pts">' + p[2] + "</span>" : "") + "</li>";
     });
     d.innerHTML = h + "</ul>";
     grid.appendChild(d);
