@@ -1,0 +1,237 @@
+<title>Gran Torneo MK8 · 2026</title>
+<style>
+  :root{
+    --bg:#0b1020; --card:#141b32; --card2:#182042; --ink:#f4f6ff; --muted:#9aa6c8;
+    --accent:#ffd23f; --red:#e63946; --blue:#3a86ff; --green:#06d6a0; --line:#27314f;
+    color-scheme:dark;
+  }
+  html{background:var(--bg)}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+  }
+  .rail{height:6px;background:linear-gradient(90deg,var(--red),var(--blue))}
+  .checker{
+    height:14px;background-color:#000;
+    background-image:
+      linear-gradient(45deg,#ffffff2b 25%,transparent 25%,transparent 75%,#ffffff2b 75%),
+      linear-gradient(45deg,#ffffff2b 25%,transparent 25%,transparent 75%,#ffffff2b 75%);
+    background-size:14px 14px;background-position:0 0,7px 7px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 64px}
+  header.hero{padding:44px 0 28px;text-align:left}
+  .kicker{
+    display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:10px;
+  }
+  h1{
+    margin:0 0 10px;font-size:clamp(2rem,7vw,3.1rem);line-height:1.05;
+    font-weight:800;letter-spacing:-.02em;text-wrap:balance;
+  }
+  h1 .gold{color:var(--accent)}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .chip{
+    background:var(--card);border:1px solid var(--line);border-radius:999px;
+    padding:6px 14px;font-size:.88rem;font-weight:600;
+  }
+  .chip b{color:var(--accent);font-weight:700}
+  .chip.tbd{border-style:dashed;color:var(--muted)}
+  section{margin-top:40px}
+  h2{
+    font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 18px;font-weight:700;
+  }
+  p{margin:.5em 0;max-width:62ch}
+  .lead{color:var(--muted)}
+  /* premios */
+  .prize{
+    background:linear-gradient(90deg,rgba(255,210,63,.12),transparent);
+    border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:10px;padding:14px 18px;font-size:1rem;
+  }
+  /* llegada timeline */
+  .times{display:grid;gap:0;margin:0;padding:0;list-style:none}
+  .times li{
+    display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:baseline;
+    padding:12px 0;border-bottom:1px dashed var(--line);
+  }
+  .times li:last-child{border-bottom:none}
+  .t{
+    font-weight:800;font-size:1.15rem;color:var(--ink);
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .t.cut{color:var(--red)}
+  .times small{display:block;color:var(--muted)}
+  /* formato steps */
+  .steps{display:grid;gap:12px;margin:0;padding:0;list-style:none;counter-reset:paso}
+  .steps li{
+    counter-increment:paso;background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:14px 16px 14px 56px;position:relative;
+  }
+  .steps li::before{
+    content:counter(paso);position:absolute;left:16px;top:14px;
+    width:26px;height:26px;border-radius:50%;background:var(--accent);color:#0b1020;
+    font-weight:800;display:grid;place-items:center;font-size:.95rem;
+  }
+  .steps b{color:var(--accent)}
+  .hokage{border-left:4px solid var(--green)}
+  .hokage::before{background:var(--green)}
+  /* grupos */
+  .groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px}
+  .group{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .group h3{
+    margin:0;padding:8px 12px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
+    background:var(--card2);border-bottom:1px solid var(--line);color:var(--accent);
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .group h3 small{color:var(--muted);letter-spacing:0;text-transform:none;font-weight:400}
+  .group ul{list-style:none;margin:0;padding:10px 12px;display:grid;gap:6px}
+  .group li{font-size:.94rem}
+  .group li.top{font-weight:700}
+  .group li.top::after{content:" ★";color:var(--accent);font-size:.8em}
+  /* bracket */
+  .bracket{display:grid;gap:10px}
+  .stage{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;
+    display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;
+  }
+  .stage .tag{font-weight:800;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+  .stage.final .tag{color:var(--accent)}
+  .stage.final{border-color:var(--accent);background:linear-gradient(90deg,rgba(255,210,63,.10),var(--card))}
+  .stage p{margin:0;font-size:.94rem;color:var(--ink)}
+  .stage p span{color:var(--muted)}
+  .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+  /* settings */
+  .settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:0;padding:0;list-style:none}
+  .settings li{
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:10px 14px;font-size:.92rem;
+  }
+  .settings b{color:var(--accent)}
+  footer{
+    margin-top:52px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.9rem;
+  }
+  footer a{color:var(--blue);text-decoration:none;font-weight:600}
+  footer a:hover,footer a:focus-visible{text-decoration:underline;outline:none}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="rail"></div>
+<div class="checker"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kicker">Después de 8 semanas de time trials…</span>
+    <h1>GRAN TORNEO <span class="gold">MK8</span> 2026</h1>
+    <p class="lead">30 corredores · 8 grupos · una gran final. Todos los inscritos ya tienen lugar — aquí están las reglas, los grupos y el camino al trofeo.</p>
+    <div class="meta">
+      <span class="chip tbd">📅 Fecha por confirmar</span>
+      <span class="chip">🕑 Arrancamos <b>2:00 PM</b></span>
+      <span class="chip">🎮 3 Switch · 3 TVs</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>El premio</h2>
+    <div class="prize">
+      🏆 <b>AirPods + iPad.</b> El campeón del torneo escoge primero; el campeón Hokage se lleva el otro. Dos caminos reales a un premio real.
+    </div>
+  </section>
+
+  <section>
+    <h2>Reglas de llegada</h2>
+    <ul class="times">
+      <li>
+        <span class="t">2:00 PM</span>
+        <div>Registro. Llega antes: agarra control, practica, acomódate en tu estación.
+          <small>Trae tu control si tienes — hay Joy-Cons, pero los buenos vuelan.</small></div>
+      </li>
+      <li>
+        <span class="t cut">2:15 PM</span>
+        <div><b>Se cierra la lista.</b> Si no llegaste, tu grupo corre sin ti — sin excepciones, hay premio en juego.
+          <small>¿Traes a alguien más? Que llegue antes del corte y lo acomodamos.</small></div>
+      </li>
+      <li>
+        <span class="t">2:20 PM</span>
+        <div>Tutorial de 3 minutos + sorteo de pistas en vivo. Nadie pierde por un menú.</div>
+      </li>
+      <li>
+        <span class="t">2:30 PM</span>
+        <div>¡Arrancan las copas de grupo!</div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>El formato</h2>
+    <ul class="steps">
+      <li><b>Copa de grupo — 3 carreras.</b> Grupos de 4, 150cc, items ON, con CPUs (carreras de 12). Las 3 pistas se revelan <b>en vivo en la mesa</b>: nadie las conoce antes.</li>
+      <li><b>Semifinales.</b> El 1er lugar de cada grupo avanza. Los 8 ganadores se dividen en dos semifinales de 4; los <b>2 mejores</b> de cada una pasan a la final.</li>
+      <li><b>Gran final.</b> 4 corredores, una sola pantalla, todos mirando. El ganador escoge premio.</li>
+      <li class="hokage"><b>Torneo Hokage 🍃</b> — ¿no avanzaste? Los 3 puntajes más bajos se vuelven <b>Hokages</b> de las 3 villas. Corren en equipo, solo cuentan los puntos del Hokage, y hay premio real. Nadie se queda fuera.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Los grupos</h2>
+    <p class="lead">Sembrados con los resultados de las 8 semanas de time trials (★ = cabeza de serie). Los grupos F y H son de 3 — con los CPUs siguen siendo carreras completas.</p>
+    <div class="groups">
+      <div class="group"><h3>Grupo A</h3><ul>
+        <li class="top">Jorge</li><li>Renata</li><li>Ana Tere</li><li>Marcelo</li></ul></div>
+      <div class="group"><h3>Grupo B</h3><ul>
+        <li class="top">Daniel (Decr)</li><li>David Celestino</li><li>Carlos</li><li>Qi Pan</li></ul></div>
+      <div class="group"><h3>Grupo C</h3><ul>
+        <li class="top">Daniel Celestino</li><li>Aarón</li><li>Fernando Coss</li><li>Zully</li></ul></div>
+      <div class="group"><h3>Grupo D</h3><ul>
+        <li class="top">Fernando Guajardo</li><li>Mati</li><li>Sebastián Coss</li><li>Alfonso</li></ul></div>
+      <div class="group"><h3>Grupo E</h3><ul>
+        <li class="top">Sarah</li><li>Lucy</li><li>Eduardo Coss</li><li>Jimena</li></ul></div>
+      <div class="group"><h3>Grupo F <small>de 3</small></h3><ul>
+        <li class="top">Pato</li><li>Monse</li><li>Sofía</li></ul></div>
+      <div class="group"><h3>Grupo G</h3><ul>
+        <li class="top">Luis Morán</li><li>Luis Jaime Coss</li><li>Rubi</li><li>René</li></ul></div>
+      <div class="group"><h3>Grupo H <small>de 3</small></h3><ul>
+        <li class="top">Marifer</li><li>Joel</li><li>Miguelito</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Camino a la final</h2>
+    <div class="bracket">
+      <div class="stage">
+        <span class="tag">Grupos</span>
+        <p>8 copas en 3 tandas <span>· A-B-C, luego D-E-F, luego G-H · el 1º de cada grupo avanza</span></p>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="stage">
+        <span class="tag">Semifinal 1</span>
+        <p>Ganadores de A · D · E · H <span>· avanzan 2</span></p>
+      </div>
+      <div class="stage">
+        <span class="tag">Semifinal 2</span>
+        <p>Ganadores de B · C · F · G <span>· avanzan 2</span></p>
+      </div>
+      <div class="arrow">▼</div>
+      <div class="stage final">
+        <span class="tag">Gran Final</span>
+        <p>4 corredores · una pantalla · todos mirando 🏁</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mismas reglas en las 3 estaciones</h2>
+    <ul class="settings">
+      <li><b>150cc</b> · items ON · CPUs ON</li>
+      <li>Smart steering <b>OFF</b> · auto-acelerar <b>OFF</b></li>
+      <li>Settings verificados antes de arrancar</li>
+      <li>Empates: tabla de puntos de la copa; empate exacto = <b>carrera de desempate</b></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>⏱️ La semana 8 (<b>Mount Wario</b>) sigue abierta hasta el sábado — última chance de subir tiempo y presumir en la <a href="https://mk8tabla2026.decrgandalf.com">tabla de posiciones</a>.</p>
+  </footer>
+</div>
