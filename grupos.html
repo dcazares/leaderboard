@@ -17,8 +17,22 @@
     line-height:1.55;
   }
   .rail{height:6px;background:linear-gradient(90deg,var(--red),var(--blue))}
+  nav.top{
+    position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
+    background:rgba(11,16,32,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .nwrap{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;gap:8px;align-items:center}
+  .brand{font-size:.9rem;color:var(--muted);white-space:nowrap}
+  .brand b{color:var(--ink)}
+  .nspace{flex:1}
+  nav.top a{
+    color:var(--muted);text-decoration:none;font-weight:700;font-size:.9rem;
+    padding:6px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;
+  }
+  nav.top a.on{color:var(--accent);border-color:var(--line);background:var(--card)}
+  nav.top a:hover,nav.top a:focus-visible{color:var(--ink)}
   .wrap{max-width:900px;margin:0 auto;padding:0 20px 64px}
-  header.hero{padding:36px 0 20px}
+  header.hero{padding:36px 0 8px}
   .kicker{
     display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;
     text-transform:uppercase;color:var(--accent);margin-bottom:10px;
@@ -30,14 +44,21 @@
   }
   p{margin:.5em 0;max-width:62ch}
   .lead{color:var(--muted)}
-  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-  .chip{
-    background:var(--card);border:1px solid var(--line);border-radius:999px;
-    padding:6px 14px;font-size:.88rem;font-weight:600;color:var(--ink);text-decoration:none;
+  .finder{margin:20px 0 6px}
+  .finder label{display:block;font-weight:700;margin-bottom:8px}
+  .finder input{
+    width:100%;max-width:440px;box-sizing:border-box;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:13px 16px;color:var(--ink);font-size:1.05rem;
   }
-  a.chip:hover,a.chip:focus-visible{border-color:var(--accent)}
+  .finder input::placeholder{color:var(--muted)}
+  .finder input:focus{outline:2px solid var(--accent);outline-offset:2px}
+  #finder-out{margin-top:10px;font-size:1rem;color:var(--muted);min-height:1.5em}
+  #finder-out b{color:var(--accent)}
   .groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:20px}
-  .group{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .group{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:opacity .15s}
+  .group.dim{opacity:.3}
+  .group.hit{border-color:var(--accent)}
   .group h3{
     margin:0;padding:8px 12px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
     background:var(--card2);border-bottom:1px solid var(--line);color:var(--accent);
@@ -45,9 +66,11 @@
   }
   .group h3 small{color:var(--muted);letter-spacing:0;text-transform:none;font-weight:400}
   .group ul{list-style:none;margin:0;padding:10px 12px;display:grid;gap:6px}
-  .group li{font-size:.94rem;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+  .group li{font-size:.94rem;display:flex;justify-content:space-between;gap:8px;align-items:baseline;border-radius:6px;padding:2px 6px;margin:-2px -6px}
   .group li.star .nm{font-weight:700}
   .group li.star .nm::after{content:" ★";color:var(--accent);font-size:.8em}
+  .group li.me{background:linear-gradient(90deg,rgba(255,210,63,.18),transparent)}
+  .group li.me .nm{color:var(--accent)}
   .pts{color:var(--accent);font-weight:800;font-variant-numeric:tabular-nums}
   .wc{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:14px;align-items:center;margin-top:20px}
   .wc-col{display:grid;gap:14px}
@@ -96,14 +119,24 @@
 <body>
 
 <div class="rail"></div>
+<nav class="top">
+  <div class="nwrap">
+    <span class="brand">🏁 <b>Torneo MK8</b> · sáb 25</span>
+    <span class="nspace"></span>
+    <a href="/torneo">Reglas</a>
+    <a href="/grupos" class="on" aria-current="page">Grupos y bracket</a>
+  </div>
+</nav>
+
 <div class="wrap">
   <header class="hero">
-    <span class="kicker">Gran Torneo MK8 · Sábado 25 de julio · Mil Encinos</span>
+    <span class="kicker">Sábado 25 de julio · Mil Encinos · 2:00 PM</span>
     <h1>Grupos y bracket 👥🏁</h1>
-    <p class="lead">Grupos de 4, sembrados con los tiempos de los time trials — la ★ marca a quien registró tiempo. <b>Los 2 primeros de cada grupo avanzan.</b> El sábado, los puntos y el bracket se llenan aquí mismo: recarga la página.</p>
-    <div class="meta">
-      <a class="chip" href="/torneo">📋 Reglas y horario</a>
-      <span class="chip">Tandas: <b>2:30</b> A·B·C · <b>3:00</b> D·E·F · <b>3:30</b> G·H</span>
+    <p class="lead">Los <b>2 primeros de cada grupo avanzan</b> a cuartos. La ★ marca a quien registró tiempo en los time trials. El sábado los puntos y el bracket se llenan aquí — recarga la página.</p>
+    <div class="finder">
+      <label for="finder-in">¿En qué grupo estoy?</label>
+      <input id="finder-in" type="search" autocomplete="off" placeholder="Escribe tu nombre…">
+      <p id="finder-out" aria-live="polite"></p>
     </div>
   </header>
 
@@ -111,7 +144,7 @@
   <div class="groups" id="grupos-grid"></div>
 
   <h2>El bracket — en vivo</h2>
-  <p class="lead">Los 2 primeros de cada grupo toman su lugar en cuartos; el ganador de cada copa avanza al centro. QF1–QF3 a las 4:00, QF4 y el <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> a las 4:30.</p>
+  <p class="lead">Cada ganador de copa avanza al centro. QF1–QF3 a las 4:00; QF4 y el <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> a las 4:30.</p>
   <div class="wc">
     <div class="wc-col" id="wc-left"></div>
     <div class="wc-center">
@@ -123,7 +156,7 @@
   </div>
 
   <footer>
-    <p>Los grupos G y H son de 3 — con los CPUs siguen siendo carreras completas. Reglas, horario y el Relevo Hokage: <a href="/torneo">la página del torneo</a>.</p>
+    <p>Los grupos G y H son de 3 — con los CPUs siguen siendo carreras completas. Reglas, horario y Relevo Hokage: <a href="/torneo">la página del torneo</a>.</p>
   </footer>
 </div>
 
@@ -141,10 +174,10 @@
    - Al final: pon `champion`. Guardar + publicar y listo.               */
 const GRUPOS = [
   { id: "A", players: [["Jorge", true, null], ["Alfonso", false, null], ["Carlos", false, null], ["Luis Jaime Coss", false, null]] },
-  { id: "B", players: [["Daniel (Decr)", true, null], ["Marifer", false, null], ["Zully", false, null], ["Qi Pan", false, null]] },
+  { id: "B", players: [["Daniel (Decr)", true, null], ["David Celestino", true, null], ["Zully", false, null], ["Qi Pan", false, null]] },
   { id: "C", players: [["Daniel Celestino", true, null], ["Ana Tere", true, null], ["René", false, null], ["Jimena", false, null]] },
   { id: "D", players: [["Fernando Guajardo", true, null], ["Renata", true, null], ["Fernando Coss", false, null], ["Rubi", false, null]] },
-  { id: "E", players: [["Sarah", true, null], ["David Celestino", true, null], ["Sebastián Coss", false, null], ["Marcelo", false, null]] },
+  { id: "E", players: [["Sarah", true, null], ["Marifer", false, null], ["Sebastián Coss", false, null], ["Marcelo", false, null]] },
   { id: "F", players: [["Pato", true, null], ["Aarón", true, null], ["Eduardo Coss", false, null], ["Miguelito", false, null]] },
   { id: "G", players: [["Luis Morán", true, null], ["Mati", true, null], ["Sofía", false, null]] },
   { id: "H", players: [["Monse", true, null], ["Lucy", true, null], ["Joel", false, null]] }
@@ -161,17 +194,58 @@ const BRACKET = {
 };
 /* ======================= (no editar de aquí abajo) ==================== */
 (function () {
+  var TANDA = { A: "2:30", B: "2:30", C: "2:30", D: "3:00", E: "3:00", F: "3:00", G: "3:30", H: "3:30" };
+
   var grid = document.getElementById("grupos-grid");
   GRUPOS.forEach(function (g) {
     var d = document.createElement("div");
     d.className = "group";
-    var h = "<h3>Grupo " + g.id + (g.players.length < 4 ? " <small>de " + g.players.length + "</small>" : "") + "</h3><ul>";
+    d.dataset.group = g.id;
+    var h = "<h3>Grupo " + g.id + "<small>" + (g.players.length < 4 ? "de " + g.players.length + " · " : "") + TANDA[g.id] + " PM</small></h3><ul>";
     g.players.forEach(function (p) {
-      h += '<li class="' + (p[1] ? "star" : "") + '"><span class="nm">' + p[0] + "</span>" +
+      h += '<li class="' + (p[1] ? "star" : "") + '" data-name="' + p[0] + '"><span class="nm">' + p[0] + "</span>" +
            (p[2] != null ? '<span class="pts">' + p[2] + " pts</span>" : "") + "</li>";
     });
     d.innerHTML = h + "</ul>";
     grid.appendChild(d);
+  });
+
+  var inp = document.getElementById("finder-in"), out = document.getElementById("finder-out");
+  function norm(s) { return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+  inp.addEventListener("input", function () {
+    var q = norm(inp.value.trim());
+    var cards = grid.querySelectorAll(".group");
+    cards.forEach(function (c) { c.classList.remove("dim", "hit"); });
+    grid.querySelectorAll("li.me").forEach(function (li) { li.classList.remove("me"); });
+    if (q.length < 2) { out.innerHTML = ""; return; }
+    var hits = [];
+    GRUPOS.forEach(function (g) {
+      g.players.forEach(function (p) {
+        if (norm(p[0]).indexOf(q) !== -1) hits.push({ g: g.id, n: p[0] });
+      });
+    });
+    if (!hits.length) {
+      out.textContent = "No encontramos ese nombre — pregúntale al organizador 😅";
+      return;
+    }
+    var hitGroups = {};
+    hits.forEach(function (h) {
+      hitGroups[h.g] = true;
+      var li = grid.querySelector('.group[data-group="' + h.g + '"] li[data-name="' + h.n + '"]');
+      if (li) li.classList.add("me");
+    });
+    cards.forEach(function (c) {
+      c.classList.add(hitGroups[c.dataset.group] ? "hit" : "dim");
+    });
+    if (hits.length === 1) {
+      out.innerHTML = hits[0].n + " está en el <b>Grupo " + hits[0].g + "</b> — corre en la tanda de las <b>" + TANDA[hits[0].g] + " PM</b>.";
+    } else {
+      out.innerHTML = hits.map(function (h) {
+        return h.n + " → <b>Grupo " + h.g + "</b> (" + TANDA[h.g] + ")";
+      }).join(" · ");
+    }
+    var first = grid.querySelector(".group.hit");
+    if (first && hits.length === 1) first.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
 
   function fill(el, title, phs, names, winner) {

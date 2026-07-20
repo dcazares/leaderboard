@@ -17,6 +17,21 @@
     line-height:1.55;
   }
   .rail{height:6px;background:linear-gradient(90deg,var(--red),var(--blue))}
+  nav.top{
+    position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
+    background:rgba(11,16,32,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .nwrap{max-width:760px;margin:0 auto;padding:10px 20px;display:flex;gap:8px;align-items:center}
+  .brand{font-size:.9rem;color:var(--muted);white-space:nowrap}
+  .brand b{color:var(--ink)}
+  .nspace{flex:1}
+  nav.top a{
+    color:var(--muted);text-decoration:none;font-weight:700;font-size:.9rem;
+    padding:6px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;
+  }
+  nav.top a.on{color:var(--accent);border-color:var(--line);background:var(--card)}
+  nav.top a:hover,nav.top a:focus-visible{color:var(--ink)}
+  section[id]{scroll-margin-top:64px}
   .checker{
     height:14px;background-color:#000;
     background-image:
@@ -100,6 +115,14 @@
 <body>
 
 <div class="rail"></div>
+<nav class="top">
+  <div class="nwrap">
+    <span class="brand">🏁 <b>Torneo MK8</b> · sáb 25</span>
+    <span class="nspace"></span>
+    <a href="/torneo" class="on" aria-current="page">Reglas</a>
+    <a href="/grupos">Grupos y bracket</a>
+  </div>
+</nav>
 <div class="checker"></div>
 
 <div class="wrap">
@@ -113,8 +136,10 @@
       <span class="chip">📍 <b>Mil Encinos</b></span>
     </div>
     <div class="meta">
-      <a class="chip" href="/grupos">👥🏁 <b>Grupos y bracket en vivo</b></a>
-      <a class="chip" href="https://mk8tabla2026.decrgandalf.com">⏱️ Tabla de tiempos</a>
+      <a class="chip" href="/grupos">👥 <b>¿En qué grupo estoy?</b></a>
+      <a class="chip" href="#horario">⏰ Horario</a>
+      <a class="chip" href="#como-se-juega">🎮 Cómo se juega</a>
+      <a class="chip" href="#relevo-hokage">🍃 Relevo Hokage</a>
     </div>
   </header>
 
@@ -126,7 +151,7 @@
     <p class="lead" style="margin-top:12px">¿Primera vez en Mario Kart? Tranqui: hay tutorial de 3 minutos al arrancar y se prestan controles. Lo único imperdonable es llegar tarde.</p>
   </section>
 
-  <section>
+  <section id="horario">
     <h2>El horario del día</h2>
     <ul class="times">
       <li>
@@ -157,7 +182,7 @@
     </ul>
   </section>
 
-  <section>
+  <section id="como-se-juega">
     <h2>Cómo se juega</h2>
     <ul class="steps">
       <li><b>Fase de grupos.</b> Tu grupo de 4 corre <b>una copa completa</b> (Grand Prix de 4 carreras) — la copa se sortea en vivo en la mesa. <b>Los 2 primeros avanzan.</b> <a href="/grupos">Busca tu grupo aquí →</a></li>
