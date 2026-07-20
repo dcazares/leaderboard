@@ -114,6 +114,42 @@
     padding:10px 14px;font-size:.92rem;
   }
   .settings b{color:var(--accent)}
+  /* bracket en vivo */
+  .wc{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:14px;align-items:center}
+  .wc-col{display:grid;gap:14px}
+  .wc-center{display:grid;gap:14px}
+  .bcard{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .bcard h4{
+    margin:0;padding:7px 12px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+    background:var(--card2);border-bottom:1px solid var(--line);color:var(--blue);font-weight:800;
+  }
+  .bfinal>h4{color:var(--accent)}
+  .bfinal{border-color:var(--accent);box-shadow:0 0 0 1px rgba(255,210,63,.25)}
+  .brev>h4{color:var(--green)}
+  .slot{
+    padding:7px 12px;border-bottom:1px dashed var(--line);font-size:.92rem;
+    color:var(--muted);font-style:italic;
+  }
+  .slot:last-child{border-bottom:none}
+  .slot.filled{color:var(--ink);font-style:normal;font-weight:600}
+  .slot.win{
+    color:var(--accent);font-weight:800;
+    background:linear-gradient(90deg,rgba(255,210,63,.14),transparent);
+  }
+  .slot.win::after{content:" ✔";font-size:.85em}
+  .champ{
+    text-align:center;border:1px dashed var(--line);border-radius:10px;padding:12px;
+    color:var(--muted);font-size:.92rem;
+  }
+  .champ.crowned{
+    border:1px solid var(--accent);background:linear-gradient(180deg,rgba(255,210,63,.16),var(--card));
+    color:var(--ink);font-size:1.05rem;
+  }
+  .champ.crowned b{color:var(--accent);font-size:1.25rem;display:block}
+  @media (max-width:640px){
+    .wc{grid-template-columns:1fr}
+    .wc-center{order:3}
+  }
   footer{
     margin-top:52px;padding-top:18px;border-top:1px solid var(--line);
     color:var(--muted);font-size:.9rem;
@@ -226,38 +262,6 @@
   </section>
 
   <section>
-    <h2>Camino a la final</h2>
-    <div class="bracket">
-      <div class="stage">
-        <span class="tag">Grupos</span>
-        <p>8 copas en 3 tandas <span>· A-B-C, luego D-E-F, luego G-H · los 2 primeros de cada grupo avanzan</span></p>
-      </div>
-      <div class="arrow">▼</div>
-      <div class="stage">
-        <span class="tag">Cuartos 1</span>
-        <p>1º de A · 2º de C · 1º de F · 2º de H <span>· avanza 1</span></p>
-      </div>
-      <div class="stage">
-        <span class="tag">Cuartos 2</span>
-        <p>1º de B · 2º de D · 1º de E · 2º de G <span>· avanza 1</span></p>
-      </div>
-      <div class="stage">
-        <span class="tag">Cuartos 3</span>
-        <p>1º de C · 2º de A · 1º de H · 2º de F <span>· avanza 1</span></p>
-      </div>
-      <div class="stage">
-        <span class="tag">Cuartos 4</span>
-        <p>1º de D · 2º de B · 1º de G · 2º de E <span>· avanza 1</span></p>
-      </div>
-      <div class="arrow">▼</div>
-      <div class="stage final">
-        <span class="tag">Gran Final</span>
-        <p>Los 4 ganadores de cuartos · una pantalla · todos mirando 🏁</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
     <h2>Mismas reglas en las 3 estaciones</h2>
     <ul class="settings">
       <li><b>150cc</b> · items ON · CPUs ON</li>
@@ -267,10 +271,77 @@
     </ul>
   </section>
 
+  <section id="bracket-vivo">
+    <h2>El bracket — en vivo 🏁</h2>
+    <p class="lead">El sábado 25 este bracket se va llenando conforme caigan los resultados. Los 2 primeros de cada grupo toman su lugar en cuartos; el ganador de cada copa avanza al centro.</p>
+    <div class="wc">
+      <div class="wc-col" id="wc-left"></div>
+      <div class="wc-center">
+        <div class="bcard bfinal" id="wc-final"></div>
+        <div class="champ" id="wc-champ"></div>
+        <div class="bcard brev" id="wc-rev"></div>
+      </div>
+      <div class="wc-col" id="wc-right"></div>
+    </div>
+  </section>
+
   <footer>
     <p>⏱️ La semana 8 (<b>Mount Wario</b>) cierra el mismo sábado 25 — última chance de subir tiempo y presumir en la <a href="https://mk8tabla2026.decrgandalf.com">tabla de posiciones</a> antes del torneo.</p>
   </footer>
 </div>
+
+<script>
+/* ============ DÍA DEL TORNEO: los resultados se llenan AQUÍ ============
+   - Cuando un grupo termina: escribe los nombres en `names` de cada QF donde
+     ese grupo tiene lugar (el orden corresponde a los placeholders `ph`).
+   - Cuando termina una copa de cuartos: pon `winner` con el nombre exacto.
+     El ganador aparece solo en la final.
+   - Revancha: llena `names` (los 4 peores puntajes) y luego `winner`.
+   - Al final: pon `champion`. Guardar + publicar y listo.               */
+const BRACKET = {
+  qf: [
+    { id: "QF1", ph: ["1º de A", "2º de C", "1º de F", "2º de H"], names: [null, null, null, null], winner: null },
+    { id: "QF2", ph: ["1º de B", "2º de D", "1º de E", "2º de G"], names: [null, null, null, null], winner: null },
+    { id: "QF3", ph: ["1º de C", "2º de A", "1º de H", "2º de F"], names: [null, null, null, null], winner: null },
+    { id: "QF4", ph: ["1º de D", "2º de B", "1º de G", "2º de E"], names: [null, null, null, null], winner: null }
+  ],
+  champion: null,
+  revancha: { ph: ["4 puntajes más bajos", "…", "…", "…"], names: [null, null, null, null], winner: null }
+};
+/* ======================= (no editar de aquí abajo) ==================== */
+(function () {
+  function fill(el, title, phs, names, winner) {
+    var h = "<h4>" + title + "</h4>";
+    for (var i = 0; i < phs.length; i++) {
+      var n = names[i], cls = "slot" + (n ? " filled" : "") + (n && n === winner ? " win" : "");
+      h += '<div class="' + cls + '">' + (n || phs[i]) + "</div>";
+    }
+    el.innerHTML = h;
+  }
+  function card(q) {
+    var d = document.createElement("div");
+    d.className = "bcard";
+    fill(d, q.id, q.ph, q.names, q.winner);
+    return d;
+  }
+  var L = document.getElementById("wc-left"), R = document.getElementById("wc-right");
+  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[2]));
+  R.appendChild(card(BRACKET.qf[1])); R.appendChild(card(BRACKET.qf[3]));
+  fill(document.getElementById("wc-final"), "🏆 Gran Final",
+       BRACKET.qf.map(function (q) { return "Ganador " + q.id; }),
+       BRACKET.qf.map(function (q) { return q.winner; }),
+       BRACKET.champion);
+  var champ = document.getElementById("wc-champ");
+  if (BRACKET.champion) {
+    champ.className = "champ crowned";
+    champ.innerHTML = "👑 CAMPEÓN <b>" + BRACKET.champion + "</b>";
+  } else {
+    champ.textContent = "👑 Campeón: por definirse el sábado 25…";
+  }
+  var rv = BRACKET.revancha;
+  fill(document.getElementById("wc-rev"), "🔄 Copa Revancha", rv.ph, rv.names, rv.winner);
+})();
+</script>
 
 </body>
 </html>
