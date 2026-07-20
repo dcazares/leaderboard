@@ -179,7 +179,7 @@
   <section>
     <h2>El premio</h2>
     <div class="prize">
-      🏆 <b>AirPods + iPad.</b> El campeón del torneo escoge primero; el campeón de la <b>Copa Revancha</b> se lleva el otro. Dos caminos reales a un premio real.
+      🏆 <b>AirPods + iPad.</b> El campeón del torneo escoge primero; el <b>Hokage campeón del Relevo</b> se lleva el otro. Dos caminos reales a un premio real.
     </div>
   </section>
 
@@ -215,11 +215,12 @@
       </li>
       <li>
         <span class="t">4:00 PM</span>
-        <div>Cuartos de final: <b>QF1 · QF2 · QF3</b></div>
+        <div>Cuartos de final: <b>QF1 · QF2 · QF3</b>
+          <small>Mientras: se suman puntos de grupos y se anuncian los Hokages y sus villas.</small></div>
       </li>
       <li>
         <span class="t">4:30 PM</span>
-        <div><b>QF4</b> y <b>Copa Revancha</b> en paralelo</div>
+        <div><b>QF4</b> y <b>Relevo Hokage</b> en paralelo</div>
       </li>
       <li>
         <span class="t">5:00 PM</span>
@@ -234,13 +235,13 @@
       <li><b>Grand Prix de grupo — una copa completa (4 carreras).</b> 150cc, items ON, con CPUs (carreras de 12). La copa se sortea <b>en vivo en la mesa</b>: nadie la conoce antes. <b>Los 2 primeros de cada grupo avanzan.</b></li>
       <li><b>Cuartos de final.</b> Los 16 clasificados corren 4 copas de 4 — cada una cruza <b>1º de un grupo con 2º de otros</b> (nunca contra tu mismo grupo). El ganador de cada copa pasa a la final.</li>
       <li><b>Gran final.</b> 4 corredores, una sola pantalla, todos mirando. El ganador escoge premio.</li>
-      <li class="hokage"><b>Copa Revancha 🔄 — la segunda chance.</b> Los <b>4 puntajes más bajos</b> de la fase de grupos corren su propio Grand Prix antes de la final. El ganador se lleva <b>el otro premio</b>. Dos finales, dos premios — nadie se queda fuera.</li>
+      <li class="hokage"><b>Relevo Hokage 🍃 — la segunda chance, por equipos.</b> Los 4 puntajes más bajos <b>entre los eliminados</b> se vuelven Hokages, cada uno con un compañero, y corren su propio Grand Prix en relevos. El Hokage ganador se lleva <b>el otro premio</b>. Reglas completas abajo — dos finales, dos premios, nadie se queda fuera.</li>
     </ul>
   </section>
 
   <section>
     <h2>Los grupos</h2>
-    <p class="lead">Sembrados <b>solo con los tiempos de los time trials</b> — la ★ marca a quien corrió las 8 semanas de pistas. Los grupos G y H son de 3; con los CPUs siguen siendo carreras completas.</p>
+    <p class="lead">Sembrados <b>solo con los tiempos de los time trials</b> — la ★ marca a quien registró tiempo en los time trials. Los grupos G y H son de 3; con los CPUs siguen siendo carreras completas.</p>
     <div class="groups">
       <div class="group"><h3>Grupo A</h3><ul>
         <li class="top">Jorge</li><li>Alfonso</li><li>Carlos</li><li>Luis Jaime Coss</li></ul></div>
@@ -271,6 +272,18 @@
     </ul>
   </section>
 
+  <section id="relevo-hokage">
+    <h2>El Relevo Hokage 🍃</h2>
+    <p class="lead">La segunda chance, por equipos: cuatro <b>villas</b>, cada una con un <b>Hokage</b> y su <b>compañero</b>, un solo control que cambia de manos a media copa.</p>
+    <ul class="steps">
+      <li><b>Los Hokages (~4:00).</b> Al cerrar los grupos se suman los puntos de todos los <b>eliminados</b>. Los <b>4 puntajes más bajos</b> son los Hokages de las villas <b>Hoja 🍃 · Arena 🏜️ · Niebla 🌫️ · Nube ⛅</b>.</li>
+      <li><b>Las parejas.</b> Automático: los <b>4 mejores eliminados</b> son los compañeros — el mejor protege al Hokage más bajo, y así en orden. ¿Prefieres a otro? Cada Hokage puede <b>cambiar su compañero</b> por cualquier otro eliminado.</li>
+      <li><b>La copa (4:30).</b> Grand Prix normal, las 4 villas + CPUs. <b>El Hokage maneja las carreras 1 y 2; el compañero, la 3 y la 4.</b> El control se pasa en la pantalla de resultados y los puntos se suman solos.</li>
+      <li class="hokage"><b>El premio.</b> La villa con más puntos gana y su <b>Hokage se lleva el segundo premio</b>; el compañero, la gloria eterna. Empate exacto: una carrera de desempate, manejada por el Hokage.</li>
+    </ul>
+    <p class="lead">Nadie corre en dos villas, solo juegan quienes corrieron grupos, y el organizador tiene la última palabra en Hokages y parejas (no-shows, empates raros o casos de trampa).</p>
+  </section>
+
   <section id="bracket-vivo">
     <h2>El bracket — en vivo 🏁</h2>
     <p class="lead">El sábado 25 este bracket se va llenando conforme caigan los resultados. Los 2 primeros de cada grupo toman su lugar en cuartos; el ganador de cada copa avanza al centro.</p>
@@ -296,7 +309,9 @@
      ese grupo tiene lugar (el orden corresponde a los placeholders `ph`).
    - Cuando termina una copa de cuartos: pon `winner` con el nombre exacto.
      El ganador aparece solo en la final.
-   - Revancha: llena `names` (los 4 peores puntajes) y luego `winner`.
+   - Relevo Hokage: en `names` pon cada villa como "Hokage + compañero"
+     (mismo orden que las villas Hoja/Arena/Niebla/Nube); `winner` = esa
+     misma cadena de la villa ganadora.
    - Al final: pon `champion`. Guardar + publicar y listo.               */
 const BRACKET = {
   qf: [
@@ -306,7 +321,7 @@ const BRACKET = {
     { id: "QF4", ph: ["1º de D", "2º de B", "1º de G", "2º de E"], names: [null, null, null, null], winner: null }
   ],
   champion: null,
-  revancha: { ph: ["4 puntajes más bajos", "…", "…", "…"], names: [null, null, null, null], winner: null }
+  revancha: { ph: ["Villa de la Hoja 🍃", "Villa de la Arena 🏜️", "Villa de la Niebla 🌫️", "Villa de la Nube ⛅"], names: [null, null, null, null], winner: null }
 };
 /* ======================= (no editar de aquí abajo) ==================== */
 (function () {
@@ -339,7 +354,7 @@ const BRACKET = {
     champ.textContent = "👑 Campeón: por definirse el sábado 25…";
   }
   var rv = BRACKET.revancha;
-  fill(document.getElementById("wc-rev"), "🔄 Copa Revancha", rv.ph, rv.names, rv.winner);
+  fill(document.getElementById("wc-rev"), "🍃 Relevo Hokage", rv.ph, rv.names, rv.winner);
 })();
 </script>
 
