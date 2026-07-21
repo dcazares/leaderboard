@@ -61,6 +61,12 @@
   .group li.star .nm{font-weight:700}
   .group li.star .nm::after{content:" ★";color:var(--accent);font-size:.8em}
   .pts{color:var(--accent);font-weight:800;font-variant-numeric:tabular-nums}
+  ol.wl{
+    margin:16px 0 0;padding:14px 18px 14px 40px;max-width:340px;
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    display:grid;gap:6px;font-size:.94rem;
+  }
+  ol.wl li::marker{color:var(--accent);font-weight:800}
   .wc{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:14px;align-items:center;margin-top:20px}
   .wc-col{display:grid;gap:14px}
   .wc-center{display:grid;gap:14px}
@@ -127,6 +133,17 @@
   <h2>Los grupos</h2>
   <div class="groups" id="grupos-grid"></div>
 
+  <h2>Lista de espera</h2>
+  <p class="lead">El torneo está <b>lleno (32 lugares)</b>. Si alguien no llega antes de las <b>2:15</b>, su lugar se ofrece <b>en este orden</b> a quien esté presente — si estás en la lista, ven a las 2:00 con control en mano:</p>
+  <ol class="wl">
+    <li>Claudia Acosta</li>
+    <li>Salvador Luna</li>
+    <li>Jaime Coss</li>
+    <li>Emanuel</li>
+    <li>Vanessa</li>
+    <li>Valeria</li>
+  </ol>
+
   <h2>El bracket — en vivo</h2>
   <p class="lead">Cada ganador de copa avanza al centro. QF1–QF3 a las 4:00; QF4 y el <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> a las 4:30.</p>
   <div class="wc">
@@ -140,7 +157,7 @@
   </div>
 
   <footer>
-    <p>El grupo H es de 3 — con los CPUs sigue siendo carrera completa. Reglas, horario y Relevo Hokage: <a href="/torneo">la página del torneo</a>.</p>
+    <p>Reglas, horario y Relevo Hokage: <a href="/torneo">la página del torneo</a>.</p>
   </footer>
 </div>
 
@@ -167,7 +184,7 @@ const GRUPOS = [
   { id: "E", players: [["Sarah", true, null], ["Marifer", false, null], ["Sebastián Coss", false, null], ["Marcelo", false, null]] },
   { id: "F", players: [["Pato", true, null], ["Aarón", true, null], ["Zully", false, null], ["Miguelito", false, null]] },
   { id: "G", players: [["Luis Morán", true, null], ["Mati", true, null], ["Sofía", false, null], ["Alex (Tato) Acosta", false, null]] },
-  { id: "H", players: [["Monse", true, null], ["Lucy", true, null], ["Joel", false, null]] }
+  { id: "H", players: [["Monse", true, null], ["Lucy", true, null], ["Joel", false, null], ["David Paez", false, null]] }
 ];
 const BRACKET = {
   qf: [
