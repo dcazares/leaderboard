@@ -145,7 +145,7 @@
   </ol>
 
   <h2>El bracket — en vivo</h2>
-  <p class="lead">Cada ganador de copa avanza al centro. QF1–QF3 a las 4:00; QF4 y el <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> a las 4:30.</p>
+  <p class="lead">Los <b>2 primeros de cada cuarto de final</b> avanzan a semifinales; los 2 primeros de cada semi van a la GRAN FINAL. El <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> corre en paralelo.</p>
   <div class="wc">
     <div class="wc-col" id="wc-left"></div>
     <div class="wc-center">
@@ -187,12 +187,18 @@ const GRUPOS = [
   { id: "H", players: [["Monse", true, 43], ["Lucy", true, 57], ["Joel", false, 29], ["Valeria", false, 22]] }
 ];
 const BRACKET = {
+  /* top 2 de cada QF avanzan (formato ajustado en vivo): pon los 2 nombres en `adv` */
   qf: [
-    { id: "QF1", ph: ["1º de A", "2º de C", "1º de F", "2º de H"], names: ["Jorge", "Jimena", "Pato", "Monse"], winner: "Jorge" },
-    { id: "QF2", ph: ["1º de B", "2º de D", "1º de E", "2º de G"], names: ["Daniel (Decr)", "Fernando Guajardo", "Sarah", "Luis Morán"], winner: "Sarah" },
-    { id: "QF3", ph: ["1º de C", "2º de A", "1º de H", "2º de F"], names: ["Charly", "Luis Jaime Coss", "Lucy", "Aarón"], winner: null },
-    { id: "QF4", ph: ["1º de D", "2º de B", "1º de G", "2º de E"], names: ["Fernando Coss", "David Celestino", "Sofía", "Marcelo"], winner: null }
+    { id: "QF1", ph: ["1º de A", "2º de C", "1º de F", "2º de H"], names: ["Jorge", "Jimena", "Pato", "Monse"], adv: ["Jorge", "Pato"] },
+    { id: "QF2", ph: ["1º de B", "2º de D", "1º de E", "2º de G"], names: ["Daniel (Decr)", "Fernando Guajardo", "Sarah", "Luis Morán"], adv: ["Sarah", "Daniel (Decr)"] },
+    { id: "QF3", ph: ["1º de C", "2º de A", "1º de H", "2º de F"], names: ["Charly", "Luis Jaime Coss", "Lucy", "Aarón"], adv: [] },
+    { id: "QF4", ph: ["1º de D", "2º de B", "1º de G", "2º de E"], names: ["Fernando Coss", "David Celestino", "Sofía", "Marcelo"], adv: [] }
   ],
+  sf: [
+    { id: "SF1", ph: ["1º de QF1", "2º de QF2", "1º de QF3", "2º de QF4"], names: ["Jorge", "Daniel (Decr)", null, null], adv: [] },
+    { id: "SF2", ph: ["1º de QF2", "2º de QF1", "1º de QF4", "2º de QF3"], names: ["Sarah", "Pato", null, null], adv: [] }
+  ],
+  final: { names: [null, null, null, null] },
   champion: null,
   revancha: { ph: ["Villa de la Hoja 🍃", "Villa de la Arena 🏜️", "Villa de la Niebla 🌫️", "Villa de la Nube ⛅"], names: [null, null, null, null], winner: null }
 };
@@ -222,10 +228,11 @@ const BRACKET = {
     grid.appendChild(d);
   });
 
-  function fill(el, title, phs, names, winner) {
+  function fill(el, title, phs, names, winners) {
+    var W = Array.isArray(winners) ? winners : (winners ? [winners] : []);
     var h = "<h4>" + title + "</h4>";
     for (var i = 0; i < phs.length; i++) {
-      var n = names[i], cls = "slot" + (n ? " filled" : "") + (n && n === winner ? " win" : "");
+      var n = names[i], cls = "slot" + (n ? " filled" : "") + (n && W.indexOf(n) >= 0 ? " win" : "");
       h += '<div class="' + cls + '">' + (n || phs[i]) + "</div>";
     }
     el.innerHTML = h;
@@ -233,15 +240,19 @@ const BRACKET = {
   function card(q) {
     var d = document.createElement("div");
     d.className = "bcard";
-    fill(d, q.id, q.ph, q.names, q.winner);
+    fill(d, q.id, q.ph, q.names, q.adv);
     return d;
   }
   var L = document.getElementById("wc-left"), R = document.getElementById("wc-right");
-  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[1]));
-  R.appendChild(card(BRACKET.qf[2])); R.appendChild(card(BRACKET.qf[3]));
+  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[1])); L.appendChild(card(BRACKET.sf[0]));
+  R.appendChild(card(BRACKET.qf[2])); R.appendChild(card(BRACKET.qf[3])); R.appendChild(card(BRACKET.sf[1]));
+  var finalNames = BRACKET.final.names.slice();
+  BRACKET.sf.forEach(function (s, si) {
+    (s.adv || []).forEach(function (n, ni) { if (!finalNames[si * 2 + ni]) finalNames[si * 2 + ni] = n; });
+  });
   fill(document.getElementById("wc-final"), "🏆 Gran Final",
-       BRACKET.qf.map(function (q) { return "Ganador " + q.id; }),
-       BRACKET.qf.map(function (q) { return q.winner; }),
+       ["1º de SF1", "2º de SF1", "1º de SF2", "2º de SF2"],
+       finalNames,
        BRACKET.champion);
   var champ = document.getElementById("wc-champ");
   if (BRACKET.champion) {
