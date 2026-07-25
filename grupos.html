@@ -145,7 +145,7 @@
   </ol>
 
   <h2>El bracket — en vivo</h2>
-  <p class="lead">Los <b>2 primeros de cada cuarto de final</b> avanzan a semifinales; los 2 primeros de cada semi van a la GRAN FINAL. El <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> corre en paralelo.</p>
+  <p class="lead">Giro final: <b>Jorge, Daniel, Lucy y Sarah</b> (la familia organizadora) se retiran de la pelea por los premios y corren su propia <b>Copa Familia</b> por diversión. La <b>GRAN FINAL por los premios</b>: Sofía, Pato, Fernando Coss y Charly. El <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> corre en paralelo.</p>
   <div class="wc">
     <div class="wc-col" id="wc-left"></div>
     <div class="wc-center">
@@ -195,10 +195,9 @@ const BRACKET = {
     { id: "QF4", ph: ["1º de D", "2º de B", "1º de G", "2º de E"], names: ["Fernando Coss", "David Celestino", "Sofía", "Marcelo"], adv: ["Fernando Coss", "Sofía"] }
   ],
   sf: [
-    { id: "SF1", ph: ["1º de QF1", "2º de QF2", "1º de QF3", "2º de QF4"], names: ["Jorge", "Daniel (Decr)", "Lucy", "Sofía"], adv: [] },
-    { id: "SF2", ph: ["1º de QF2", "2º de QF1", "1º de QF4", "2º de QF3"], names: ["Sarah", "Pato", "Fernando Coss", "Charly"], adv: [] }
+    { id: "🎉 Copa Familia · por diversión", ph: ["Jorge", "Daniel (Decr)", "Lucy", "Sarah"], names: ["Jorge", "Daniel (Decr)", "Lucy", "Sarah"], adv: [] }
   ],
-  final: { names: [null, null, null, null] },
+  final: { names: ["Sofía", "Pato", "Fernando Coss", "Charly"] },
   champion: null,
   revancha: { ph: ["Villa de la Hoja 🍃", "Villa de la Arena 🏜️", "Villa de la Niebla 🌫️", "Villa de la Nube ⛅"], names: [null, null, null, null], winner: null }
 };
@@ -244,15 +243,13 @@ const BRACKET = {
     return d;
   }
   var L = document.getElementById("wc-left"), R = document.getElementById("wc-right");
-  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[1])); L.appendChild(card(BRACKET.sf[0]));
-  R.appendChild(card(BRACKET.qf[2])); R.appendChild(card(BRACKET.qf[3])); R.appendChild(card(BRACKET.sf[1]));
-  var finalNames = BRACKET.final.names.slice();
-  BRACKET.sf.forEach(function (s, si) {
-    (s.adv || []).forEach(function (n, ni) { if (!finalNames[si * 2 + ni]) finalNames[si * 2 + ni] = n; });
-  });
-  fill(document.getElementById("wc-final"), "🏆 Gran Final",
-       ["1º de SF1", "2º de SF1", "1º de SF2", "2º de SF2"],
-       finalNames,
+  L.appendChild(card(BRACKET.qf[0])); L.appendChild(card(BRACKET.qf[1]));
+  R.appendChild(card(BRACKET.qf[2])); R.appendChild(card(BRACKET.qf[3]));
+  if (BRACKET.sf[0]) L.appendChild(card(BRACKET.sf[0]));
+  if (BRACKET.sf[1]) R.appendChild(card(BRACKET.sf[1]));
+  fill(document.getElementById("wc-final"), "🏆 Gran Final — por los premios",
+       ["Finalista", "Finalista", "Finalista", "Finalista"],
+       BRACKET.final.names,
        BRACKET.champion);
   var champ = document.getElementById("wc-champ");
   if (BRACKET.champion) {
