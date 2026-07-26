@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gran Torneo MK8 2026 · Resultados finales</title>
+<style>
+  :root{
+    --bg:#0b1020; --card:#141b32; --card2:#182042; --ink:#f4f6ff; --muted:#9aa6c8;
+    --accent:#ffd23f; --red:#e63946; --blue:#3a86ff; --green:#06d6a0; --line:#27314f;
+    color-scheme:dark;
+  }
+  html{background:var(--bg)}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+  }
+  .rail{height:6px;background:linear-gradient(90deg,var(--red),var(--blue))}
+  nav.top{
+    position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
+    background:rgba(11,16,32,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .nwrap{max-width:900px;margin:0 auto;padding:10px 20px;display:flex;gap:8px;align-items:center}
+  .brand{font-size:.9rem;color:var(--muted);white-space:nowrap}
+  .brand b{color:var(--ink)}
+  .nspace{flex:1}
+  nav.top a{
+    color:var(--muted);text-decoration:none;font-weight:700;font-size:.9rem;
+    padding:6px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;
+  }
+  nav.top a.on{color:var(--accent);border-color:var(--line);background:var(--card)}
+  nav.top a:hover,nav.top a:focus-visible{color:var(--ink)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 64px}
+  header.hero{padding:36px 0 8px}
+  .kicker{
+    display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:10px;
+  }
+  h1{margin:0 0 10px;font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;letter-spacing:-.02em}
+  h2{
+    font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:40px 0 18px;font-weight:700;
+  }
+  p{margin:.5em 0;max-width:62ch}
+  .lead{color:var(--muted)}
+  .champ-banner{
+    margin-top:18px;border:1px solid var(--accent);border-radius:12px;padding:18px 20px;
+    background:linear-gradient(180deg,rgba(255,210,63,.16),var(--card));
+  }
+  .champ-banner b.name{color:var(--accent);font-size:1.5rem;display:block;margin:.1em 0}
+  .podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .pcard .pos{font-size:1.4rem}
+  .pcard .nm{font-weight:800;font-size:1.05rem}
+  .pcard .pr{color:var(--accent);font-weight:700;font-size:.9rem}
+  .pcard .pt{color:var(--muted);font-size:.88rem}
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.95rem}
+  th{
+    text-align:left;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);
+  }
+  td{padding:8px 10px;border-bottom:1px solid var(--line)}
+  td.rk{color:var(--muted);font-weight:800;font-variant-numeric:tabular-nums;width:2.6em}
+  td.pts{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+  td.st{color:var(--muted);font-size:.88rem}
+  tr.top td{background:linear-gradient(90deg,rgba(255,210,63,.10),transparent)}
+  tr.fam td{background:linear-gradient(90deg,rgba(6,214,160,.08),transparent)}
+  .tag{
+    display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;
+    padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);
+  }
+  .tag.fam{color:var(--green);border-color:rgba(6,214,160,.4)}
+  .note{color:var(--muted);font-size:.88rem;margin-top:10px}
+  .gracias{
+    margin-top:44px;border:1px dashed var(--line);border-radius:12px;padding:18px 20px;
+    text-align:center;font-size:1.05rem;
+  }
+  .gracias b{color:var(--accent)}
+  footer{
+    margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.9rem;
+  }
+  footer a{color:var(--blue);text-decoration:none;font-weight:600}
+  footer a:hover,footer a:focus-visible{text-decoration:underline}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (max-width:560px){ td.st{display:none} th.st{display:none} }
+</style>
+</head>
+<body>
+
+<div class="rail"></div>
+<nav class="top">
+  <div class="nwrap">
+    <span class="brand">🏁 <b>Torneo MK8</b> · sáb 25</span>
+    <span class="nspace"></span>
+    <a href="/torneo">Reglas</a>
+    <a href="/grupos">Grupos y bracket</a>
+    <a href="/resultados" class="on" aria-current="page">Resultados</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kicker">Sábado 25 de julio · Mil Encinos · 32 corredores</span>
+    <h1>Resultados finales 🏆</h1>
+    <p class="lead">8 copas de grupo, 4 cuartos de final, una Copa Familia y una Gran Final. Así terminó el Gran Torneo MK8 2026.</p>
+  </header>
+
+  <div class="champ-banner">
+    👑 CAMPEÓN DEL TORNEO
+    <b class="name">Fernando Coss</b>
+    60 puntos en la Gran Final — copa perfecta. Se llevó el <b>iPad</b> 🥇
+  </div>
+
+  <h2>La Gran Final</h2>
+  <div class="podium">
+    <div class="pcard"><div class="pos">🥇</div><div class="nm">Fernando Coss</div><div class="pr">iPad</div><div class="pt">60 pts</div></div>
+    <div class="pcard"><div class="pos">🥈</div><div class="nm">Pato</div><div class="pr">AirPods</div><div class="pt">38 pts</div></div>
+    <div class="pcard"><div class="pos">🥉</div><div class="nm">Charly</div><div class="pt">34 pts</div></div>
+    <div class="pcard"><div class="pos">4º</div><div class="nm">Sofía</div><div class="pt">29 pts</div></div>
+  </div>
+  <p class="note">Fernando ganó las 4 carreras de la final. Charly llegó de walk-in a las 2:15… y terminó 3º del torneo. Sofía llegó a la final ganándole el pase a Marcelo y David en la última copa de cuartos.</p>
+
+  <h2>Copa Familia 🎉</h2>
+  <p class="lead">Jorge, Daniel (Decr), Lucy y Sarah — la familia organizadora — se retiraron de la pelea por los premios y corrieron su propia copa por el puro gusto. Sarah y Jorge avanzaron a una <b>superfinal amistosa</b> contra los dos primeros de la Gran Final… y la cerraron con un <b>empate exacto en 43 puntos</b>, con Fernando Coss a un solo punto (42).</p>
+  <table>
+    <thead><tr><th></th><th>Superfinal amistosa</th><th style="text-align:right">Pts</th></tr></thead>
+    <tbody>
+      <tr class="fam"><td class="rk">1</td><td>Sarah 🤝 Jorge — empate</td><td class="pts">43</td></tr>
+      <tr><td class="rk">3</td><td>Fernando Coss</td><td class="pts">42</td></tr>
+      <tr><td class="rk">4</td><td>Pato</td><td class="pts">27</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Ranking final — los 32</h2>
+  <table>
+    <thead><tr><th>#</th><th>Corredor</th><th class="st">Hasta dónde llegó</th><th style="text-align:right">Pts</th></tr></thead>
+    <tbody>
+      <tr class="top"><td class="rk">1</td><td>Fernando Coss 👑</td><td class="st">Campeón — iPad</td><td class="pts">60</td></tr>
+      <tr class="top"><td class="rk">2</td><td>Pato</td><td class="st">Subcampeón — AirPods</td><td class="pts">38</td></tr>
+      <tr class="top"><td class="rk">3</td><td>Charly</td><td class="st">Gran Final</td><td class="pts">34</td></tr>
+      <tr class="top"><td class="rk">4</td><td>Sofía</td><td class="st">Gran Final</td><td class="pts">29</td></tr>
+      <tr class="fam"><td class="rk">—</td><td>Sarah <span class="tag fam">Copa Familia</span></td><td class="st">1ª superfinal amistosa (empate)</td><td class="pts">43</td></tr>
+      <tr class="fam"><td class="rk">—</td><td>Jorge <span class="tag fam">Copa Familia</span></td><td class="st">1º superfinal amistosa (empate)</td><td class="pts">43</td></tr>
+      <tr class="fam"><td class="rk">—</td><td>Daniel (Decr) <span class="tag fam">Copa Familia</span></td><td class="st">3º Copa Familia</td><td class="pts">—</td></tr>
+      <tr class="fam"><td class="rk">—</td><td>Lucy <span class="tag fam">Copa Familia</span></td><td class="st">4ª Copa Familia · 1ª en QF3 con 50</td><td class="pts">—</td></tr>
+      <tr><td class="rk">5</td><td>Luis Morán</td><td class="st">Cuartos (QF2)</td><td class="pts">39</td></tr>
+      <tr><td class="rk">6</td><td>Luis Jaime Coss</td><td class="st">Cuartos (QF3)</td><td class="pts">33</td></tr>
+      <tr><td class="rk">7</td><td>Fernando Guajardo</td><td class="st">Cuartos (QF2)</td><td class="pts">33</td></tr>
+      <tr><td class="rk">8</td><td>Jimena</td><td class="st">Cuartos (QF1)</td><td class="pts">32</td></tr>
+      <tr><td class="rk">9</td><td>Aarón</td><td class="st">Cuartos (QF3)</td><td class="pts">31</td></tr>
+      <tr><td class="rk">10</td><td>Marcelo</td><td class="st">Cuartos (QF4)</td><td class="pts">27</td></tr>
+      <tr><td class="rk">11</td><td>David Celestino</td><td class="st">Cuartos (QF4)</td><td class="pts">24</td></tr>
+      <tr><td class="rk">12</td><td>Monse</td><td class="st">Cuartos (QF1)</td><td class="pts">13</td></tr>
+      <tr><td class="rk">13</td><td>Daniel Celestino</td><td class="st">Grupos (C)</td><td class="pts">37</td></tr>
+      <tr><td class="rk">14</td><td>Marifer</td><td class="st">Grupos (E)</td><td class="pts">37</td></tr>
+      <tr><td class="rk">15</td><td>Vanessa</td><td class="st">Grupos (F)</td><td class="pts">34</td></tr>
+      <tr><td class="rk">16</td><td>Sebastián Coss</td><td class="st">Grupos (E)</td><td class="pts">34</td></tr>
+      <tr><td class="rk">17</td><td>Joel</td><td class="st">Grupos (H)</td><td class="pts">29</td></tr>
+      <tr><td class="rk">18</td><td>Mati</td><td class="st">Grupos (G)</td><td class="pts">27</td></tr>
+      <tr><td class="rk">19</td><td>Eduardo Coss</td><td class="st">Grupos (B)</td><td class="pts">26</td></tr>
+      <tr><td class="rk">20</td><td>Valeria</td><td class="st">Grupos (H)</td><td class="pts">22</td></tr>
+      <tr><td class="rk">21</td><td>Alfonso</td><td class="st">Grupos (A)</td><td class="pts">17</td></tr>
+      <tr><td class="rk">22</td><td>Renata</td><td class="st">Grupos (D)</td><td class="pts">17</td></tr>
+      <tr><td class="rk">23</td><td>Qi Pan</td><td class="st">Grupos (B)</td><td class="pts">15</td></tr>
+      <tr><td class="rk">24</td><td>Ana Tere</td><td class="st">Grupos (C)</td><td class="pts">13</td></tr>
+      <tr><td class="rk">25</td><td>Carlos</td><td class="st">Grupos (A)</td><td class="pts">10</td></tr>
+      <tr><td class="rk">26</td><td>Rubi</td><td class="st">Grupos (D)</td><td class="pts">10</td></tr>
+      <tr><td class="rk">27</td><td>Miguelito</td><td class="st">Grupos (F)</td><td class="pts">7</td></tr>
+      <tr><td class="rk">28</td><td>Tato</td><td class="st">Grupos (G)</td><td class="pts">5</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Puntos = su última copa jugada. Dentro de cada bloque (cuartos / grupos) el orden es por puntos; los empates los decide la posición en pantalla de su copa. La familia organizadora corrió fuera de concurso. Sustituciones del día: Charly por René (grupo C), Vanessa por Zully (grupo F) y Valeria por David Paez (grupo H).</p>
+
+  <div class="gracias">
+    🏁 <b>Volveremos a correr pronto.</b><br>
+    Fue un enorme placer recibirlos y verlos dar lo mejor — gracias por una tarde increíble. 🍄
+  </div>
+
+  <footer>
+    <p>👥 <a href="/grupos">Grupos y bracket del torneo</a> · 📋 <a href="/torneo">Las reglas</a> · ⏱️ <a href="/">La tabla de las 8 semanas</a></p>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -120,6 +120,7 @@
     <span class="nspace"></span>
     <a href="/torneo">Reglas</a>
     <a href="/grupos" class="on" aria-current="page">Grupos y bracket</a>
+    <a href="/resultados">Resultados</a>
   </div>
 </nav>
 
@@ -127,7 +128,7 @@
   <header class="hero">
     <span class="kicker">Sábado 25 de julio · Mil Encinos · 2:00 PM</span>
     <h1>Grupos y bracket 👥🏁</h1>
-    <p class="lead">Los <b>2 primeros de cada grupo avanzan</b> a cuartos. La ★ marca a quien registró tiempo en los time trials. El sábado los puntos y el bracket se llenan aquí — recarga la página.</p>
+    <p class="lead">Así quedó el torneo del 25 de julio. La ★ marca a quien registró tiempo en los time trials. Ranking completo en <a href="/resultados" style="color:var(--blue);text-decoration:none;font-weight:600">resultados</a>.</p>
   </header>
 
   <h2>Los grupos</h2>
@@ -145,7 +146,7 @@
   </ol>
 
   <h2>El bracket — en vivo</h2>
-  <p class="lead">Giro final: <b>Jorge, Daniel, Lucy y Sarah</b> (la familia organizadora) se retiran de la pelea por los premios y corren su propia <b>Copa Familia</b> por diversión. La <b>GRAN FINAL por los premios</b>: Sofía, Pato, Fernando Coss y Charly. El <a href="/torneo#relevo-hokage" style="color:var(--blue);text-decoration:none;font-weight:600">Relevo Hokage 🍃</a> corre en paralelo.</p>
+  <p class="lead">🏁 <b>Torneo terminado.</b> Jorge, Daniel, Lucy y Sarah (la familia organizadora) se retiraron de la pelea por los premios y corrieron su propia <b>Copa Familia</b>. Campeón del torneo: <b>Fernando Coss</b> 👑. Los resultados completos y el ranking final están en <a href="/resultados" style="color:var(--blue);text-decoration:none;font-weight:600">la página de resultados</a>.</p>
   <div class="wc">
     <div class="wc-col" id="wc-left"></div>
     <div class="wc-center">
@@ -157,7 +158,8 @@
   </div>
 
   <footer>
-    <p>Reglas, horario y Relevo Hokage: <a href="/torneo">la página del torneo</a>.</p>
+    <p>🏆 <a href="/resultados">Resultados finales y ranking completo</a> · <a href="/torneo">Reglas del torneo</a></p>
+    <p>Volveremos a correr pronto — fue un enorme placer recibirlos y verlos dar lo mejor. 🏁</p>
   </footer>
 </div>
 
@@ -171,10 +173,7 @@
    BRACKET:
    - Grupo terminado: escribe los nombres en `names` de cada QF donde ese
      grupo tiene lugar (el orden corresponde a los placeholders `ph`).
-   - Copa de cuartos terminada: pon `winner` con el nombre exacto — aparece
-     solo en la final.
-   - Relevo Hokage: en `names` pon cada villa como "Hokage + compañero"
-     (orden: Hoja/Arena/Niebla/Nube); `winner` = la cadena de la ganadora.
+   - Copa de cuartos terminada: pon los 2 nombres que avanzan en `adv`.
    - Al final: pon `champion`. Guardar + publicar y listo.               */
 const GRUPOS = [
   { id: "A", players: [["Jorge", true, 60], ["Alfonso", false, 17], ["Carlos", false, 10], ["Luis Jaime Coss", false, 29]] },
@@ -195,11 +194,11 @@ const BRACKET = {
     { id: "QF4", ph: ["1º de D", "2º de B", "1º de G", "2º de E"], names: ["Fernando Coss", "David Celestino", "Sofía", "Marcelo"], adv: ["Fernando Coss", "Sofía"] }
   ],
   sf: [
-    { id: "🎉 Copa Familia · por diversión", ph: ["Jorge", "Daniel (Decr)", "Lucy", "Sarah"], names: ["Jorge", "Daniel (Decr)", "Lucy", "Sarah"], adv: [] }
+    { id: "🎉 Copa Familia · por diversión", ph: ["", "", "", ""], names: ["Sarah", "Jorge", "Daniel (Decr)", "Lucy"], adv: ["Sarah", "Jorge"] },
+    { id: "🌟 Superfinal amistosa · empate 43-43", ph: ["", "", "", ""], names: ["Sarah · 43", "Jorge · 43", "Fernando Coss · 42", "Pato · 27"], adv: ["Sarah · 43", "Jorge · 43"] }
   ],
-  final: { names: ["Sofía", "Pato", "Fernando Coss", "Charly"] },
-  champion: null,
-  revancha: { ph: ["Villa de la Hoja 🍃", "Villa de la Arena 🏜️", "Villa de la Niebla 🌫️", "Villa de la Nube ⛅"], names: [null, null, null, null], winner: null }
+  final: { names: ["Fernando Coss · 60", "Pato · 38", "Charly · 34", "Sofía · 29"] },
+  champion: "Fernando Coss · 60"
 };
 /* ======================= (no editar de aquí abajo) ==================== */
 (function () {
@@ -252,14 +251,9 @@ const BRACKET = {
        BRACKET.final.names,
        BRACKET.champion);
   var champ = document.getElementById("wc-champ");
-  if (BRACKET.champion) {
-    champ.className = "champ crowned";
-    champ.innerHTML = "👑 CAMPEÓN <b>" + BRACKET.champion + "</b>";
-  } else {
-    champ.textContent = "👑 Campeón: por definirse el sábado 25…";
-  }
-  var rv = BRACKET.revancha;
-  fill(document.getElementById("wc-rev"), "🍃 Relevo Hokage", rv.ph, rv.names, rv.winner);
+  champ.className = "champ crowned";
+  champ.innerHTML = "👑 CAMPEÓN <b>Fernando Coss</b>🥇 iPad · 🥈 Pato: AirPods";
+  document.getElementById("wc-rev").style.display = "none";
 })();
 </script>
 

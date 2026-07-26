@@ -95,8 +95,6 @@
   .steps b{color:var(--accent)}
   .steps a{color:var(--blue);font-weight:600;text-decoration:none}
   .steps a:hover,.steps a:focus-visible{text-decoration:underline}
-  .hokage{border-left:4px solid var(--green)}
-  .hokage::before{background:var(--green)}
   .settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:0;padding:0;list-style:none}
   .settings li{
     background:var(--card);border:1px solid var(--line);border-radius:8px;
@@ -121,6 +119,7 @@
     <span class="nspace"></span>
     <a href="/torneo" class="on" aria-current="page">Reglas</a>
     <a href="/grupos">Grupos y bracket</a>
+    <a href="/resultados">Resultados</a>
   </div>
 </nav>
 <div class="checker"></div>
@@ -136,17 +135,17 @@
       <span class="chip">📍 <b>Mil Encinos</b></span>
     </div>
     <div class="meta">
-      <a class="chip" href="/grupos">👥 <b>Grupos y bracket en vivo</b></a>
+      <a class="chip" href="/resultados">🏆 <b>Resultados finales</b></a>
+      <a class="chip" href="/grupos">👥 Grupos y bracket</a>
       <a class="chip" href="#horario">⏰ Horario</a>
       <a class="chip" href="#como-se-juega">🎮 Cómo se juega</a>
-      <a class="chip" href="#relevo-hokage">🍃 Relevo Hokage</a>
     </div>
   </header>
 
   <section>
     <h2>Lo esencial</h2>
     <div class="prize">
-      🏆 <b>AirPods + iPad.</b> El campeón del torneo escoge primero; el Hokage campeón del Relevo se lleva el otro. Dos caminos reales a un premio real — y todos corren.
+      🏆 <b>AirPods + iPad.</b> Ya tienen dueño: el campeón <b>Fernando Coss</b> se llevó el iPad y el subcampeón <b>Pato</b> los AirPods — <a href="/resultados" style="color:inherit">resultados completos aquí</a>.
     </div>
     <p class="lead" style="margin-top:12px">¿Primera vez en Mario Kart? Tranqui: hay tutorial de 3 minutos al arrancar y se prestan controles. Lo único imperdonable es llegar tarde.</p>
   </section>
@@ -169,11 +168,7 @@
       </li>
       <li>
         <span class="t">4:00 PM</span>
-        <div>Cuartos de final <small>QF1 · QF2 · QF3 — y se anuncian los Hokages y sus villas.</small></div>
-      </li>
-      <li>
-        <span class="t">4:30 PM</span>
-        <div><b>QF4</b> y <b>Relevo Hokage</b>, en paralelo</div>
+        <div>Cuartos de final <small>QF1 · QF2 · QF3 · QF4</small></div>
       </li>
       <li>
         <span class="t">5:00 PM</span>
@@ -189,17 +184,6 @@
       <li><b>Cuartos de final.</b> Los 16 que avanzan corren 4 copas de 4, cruzadas para que no repitas contra tu propio grupo. <b>Solo el ganador</b> de cada copa pasa.</li>
       <li><b>Gran final.</b> Los 4 ganadores, una sola pantalla, todos mirando. El campeón escoge premio.</li>
     </ul>
-  </section>
-
-  <section id="relevo-hokage">
-    <h2>El Relevo Hokage 🍃</h2>
-    <p class="lead">El espíritu: <b>que la nueva generación se levante</b>. Los chavos con menos puntos no quedan fuera — hacen equipo con un veterano y van por el segundo premio.</p>
-    <ul class="steps">
-      <li class="hokage"><b>Cuatro villas.</b> Al terminar los grupos, los 4 chavos eliminados con menos puntos se vuelven <b>Hokages</b> de las villas Hoja 🍃 · Arena 🏜️ · Niebla 🌫️ · Nube ⛅. Cada uno hace <b>equipo</b> con un veterano eliminado — las parejas se asignan solas (el mejor veterano con el Hokage de menos puntos), pero el Hokage puede escoger a otro.</li>
-      <li class="hokage"><b>Una copa en relevos.</b> Grand Prix normal: <b>el Hokage corre las carreras 1 y 2, y su compañero cierra la copa con la 3 y la 4.</b> Mismo control, mismos puntos — el equipo suma junto.</li>
-      <li class="hokage"><b>Los premios.</b> En la villa ganadora, el <b>Hokage se lleva el segundo premio</b> y su compañero escoge un <b>Hot Wheels de Mario Kart</b>. Empate exacto: una carrera extra lo define, la corre el Hokage.</li>
-    </ul>
-    <p class="lead">El organizador tiene la última palabra: quién cuenta como nueva generación, parejas y casos raros.</p>
   </section>
 
   <section>
