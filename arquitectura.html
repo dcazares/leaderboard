@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Torneo MK8 · Cómo funciona (la arquitectura)</title>
+<meta name="description" content="Cómo funciona la máquina detrás del torneo MK8: fotos de WhatsApp, un modelo de visión, una compuerta de revisión humana y páginas estáticas que se publican solas.">
+<style>
+  :root{
+    --bg:#0b1020; --card:#141b32; --card2:#182042; --ink:#f4f6ff; --muted:#9aa6c8;
+    --accent:#ffd23f; --red:#e63946; --blue:#3a86ff; --green:#06d6a0; --line:#27314f;
+    color-scheme:dark;
+  }
+  html{background:var(--bg)}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+  }
+  .rail{height:6px;background:linear-gradient(90deg,var(--red),var(--blue))}
+  nav.top{
+    position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
+    background:rgba(11,16,32,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .nwrap{max-width:820px;margin:0 auto;padding:10px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .brand{font-size:.9rem;color:var(--muted);white-space:nowrap}
+  .brand b{color:var(--ink)}
+  .nspace{flex:1}
+  nav.top a{
+    color:var(--muted);text-decoration:none;font-weight:700;font-size:.9rem;
+    padding:6px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap;
+  }
+  nav.top a.on{color:var(--accent);border-color:var(--line);background:var(--card)}
+  nav.top a:hover,nav.top a:focus-visible{color:var(--ink)}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px 64px}
+  header.hero{padding:36px 0 8px}
+  .kicker{
+    display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:10px;
+  }
+  h1{margin:0 0 10px;font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;letter-spacing:-.02em}
+  h2{
+    font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin:40px 0 18px;font-weight:700;
+  }
+  h3{font-size:1rem;margin:22px 0 8px}
+  p{margin:.5em 0;max-width:68ch}
+  .lead{color:var(--muted)}
+  .tldr{
+    border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;
+    padding:14px 18px;background:linear-gradient(90deg,rgba(255,210,63,.10),transparent);
+    font-size:1.02rem;margin-top:16px;
+  }
+  .flow{display:grid;gap:0;margin:18px 0 0}
+  .fstep{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:12px 16px;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;
+  }
+  .fstep .ico{font-size:1.5rem;text-align:center}
+  .fstep b{display:block}
+  .fstep small{color:var(--muted)}
+  .farrow{text-align:center;color:var(--muted);padding:2px 0;font-size:1.1rem}
+  .steps{display:grid;gap:14px;margin:0;padding:0;list-style:none;counter-reset:paso}
+  .steps>li{
+    counter-increment:paso;background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:16px 18px 16px 58px;position:relative;
+  }
+  .steps>li::before{
+    content:counter(paso);position:absolute;left:16px;top:16px;
+    width:28px;height:28px;border-radius:50%;background:var(--accent);color:#0b1020;
+    font-weight:800;display:grid;place-items:center;font-size:.95rem;
+  }
+  .steps b.t{color:var(--accent);display:block;margin-bottom:4px;font-size:1.02rem}
+  pre{
+    background:#0a0e1c;border:1px solid var(--line);border-radius:8px;
+    padding:12px 14px;overflow-x:auto;font-size:.82rem;line-height:1.5;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#c9d4f5;
+    margin:10px 0 2px;
+  }
+  pre .c{color:#6b7aa3}
+  pre .k{color:var(--accent)}
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em;
+    background:var(--card2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;
+  }
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem}
+  th{
+    text-align:left;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);
+  }
+  td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  td.k{font-weight:700;white-space:nowrap}
+  td.why{color:var(--muted)}
+  .rules{display:grid;gap:10px;margin:14px 0 0;padding:0;list-style:none}
+  .rules li{
+    background:var(--card);border:1px solid var(--line);border-left:4px solid var(--green);
+    border-radius:8px;padding:10px 14px;font-size:.95rem;
+  }
+  .rules b{color:var(--green)}
+  .note{color:var(--muted);font-size:.88rem;margin-top:8px}
+  footer{
+    margin-top:44px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.9rem;
+  }
+  footer a{color:var(--blue);text-decoration:none;font-weight:600}
+  footer a:hover,footer a:focus-visible{text-decoration:underline}
+  a{color:var(--blue)}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<div class="rail"></div>
+<nav class="top">
+  <div class="nwrap">
+    <span class="brand">🏁 <b>Torneo MK8</b> · sáb 25</span>
+    <span class="nspace"></span>
+    <a href="/">Tabla</a>
+    <a href="/torneo">Reglas</a>
+    <a href="/grupos">Grupos</a>
+    <a href="/resultados">Resultados</a>
+    <a href="/arquitectura" class="on" aria-current="page">Cómo funciona</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="kicker">La máquina detrás del torneo</span>
+    <h1>Cómo funciona ⚙️</h1>
+    <p class="lead">Durante 8 semanas, la <a href="/">tabla de posiciones</a> se actualizó sola: subías la foto de tu vuelta al chat de WhatsApp y aparecías en la página. Esta es la explicación completa de cómo — con ejemplos reales — para que cualquiera pueda armar algo parecido.</p>
+    <div class="tldr">
+      <b>En una frase:</b> fotos de WhatsApp → un job las bombea a un servidor casero → un modelo de visión (Claude) las lee → lo dudoso se aparta para revisión humana → lo confirmado se escribe en un JSON → un script genera HTML estático → <code>git push</code> → Cloudflare Pages lo publica. Sin base de datos, sin backend, sin apps.
+    </div>
+  </header>
+
+  <h2>El flujo completo</h2>
+  <div class="flow">
+    <div class="fstep"><span class="ico">📱</span><span><b>Chat de WhatsApp</b><small>cada quien sube la foto de su pantalla de resultados</small></span></div>
+    <div class="farrow">↓ launchd en la laptop, cada 30 min</div>
+    <div class="fstep"><span class="ico">📦</span><span><b>El bombeo (pump)</b><small>fotos nuevas + metadata → rsync → servidor casero (<code>wa-dump/</code> + <code>manifest.jsonl</code>)</small></span></div>
+    <div class="farrow">↓ launchd en el servidor, cada 30 min</div>
+    <div class="fstep"><span class="ico">👁️</span><span><b>Lectura con visión</b><small>Claude API lee cada pantalla: tipo, tiempos, personajes, confianza</small></span></div>
+    <div class="farrow">↓</div>
+    <div class="fstep"><span class="ico">🪪</span><span><b>Identidad</b><small>remitente (JID) → persona; el personaje en pantalla NO identifica a nadie</small></span></div>
+    <div class="farrow">↓</div>
+    <div class="fstep"><span class="ico">🚦</span><span><b>La compuerta (gate)</b><small>lo claro se auto-acepta; lo dudoso se "parquea" para un humano</small></span></div>
+    <div class="farrow">↓</div>
+    <div class="fstep"><span class="ico">📄</span><span><b>leaderboard.json → HTML estático</b><small>un generador Python arma la página completa</small></span></div>
+    <div class="farrow">↓ git push</div>
+    <div class="fstep"><span class="ico">☁️</span><span><b>Cloudflare Pages</b><small>redeploy automático en ~30 segundos, gratis</small></span></div>
+  </div>
+
+  <h2>Paso a paso, con ejemplos</h2>
+  <ol class="steps">
+    <li>
+      <b class="t">La fuente: un chat normal</b>
+      No hay app ni formulario. La familia sube al grupo de WhatsApp la foto de su pantalla de time trial (contra el fantasma) — la misma foto que subirían para presumir. Ese es todo el "input" del sistema: el punto era que participar no costara nada.
+    </li>
+    <li>
+      <b class="t">El bombeo: de la laptop al servidor</b>
+      WhatsApp guarda las fotos del chat en la máquina donde está abierto. Un job programado (launchd, el cron de macOS) extrae las fotos <i>nuevas</i> del grupo con su metadata (quién la mandó, cuándo) y las empuja por <code>rsync</code> al servidor casero. Cada foto queda registrada en un manifiesto de una línea por imagen:
+      <pre>{"source_id": "38170", "sender_jid": "5218...@s.whatsapp.net",
+ "ts": "2026-06-14T09:12:44-06:00", "path": "wa-dump/38170.jpg"}</pre>
+      <p class="note">La semana se calcula después a partir de <code>ts</code> (semanas que arrancan en domingo) — así una foto que llega tarde cae en la semana correcta.</p>
+    </li>
+    <li>
+      <b class="t">La lectura: un modelo de visión con reglas aprendidas</b>
+      Cada foto nueva pasa por la API de Claude con un prompt que sabe leer pantallas de MK8. Devuelve JSON estructurado:
+      <pre>{"screen_type": "ghost_time",
+ "username": "Decr", "time": "2:05.601",
+ "track": null, "confidence": "high"}</pre>
+      Lo interesante no es el modelo — es lo que hubo que <i>enseñarle</i> con fotos reales. Las reglas se descubrieron corrigiendo lecturas una por una las primeras semanas:
+      <ul class="rules">
+        <li><b>R1:</b> la fila <b>dorada</b> es la vuelta del jugador — y NO siempre está arriba. Dorada hasta abajo = no le ganaste a tu fantasma. (El error más común antes de esta regla.)</li>
+        <li><b>R2:</b> el nombre en pantalla suele ser el <b>personaje</b>, no la persona. La identidad viene del remitente, nunca de la foto.</li>
+        <li><b>R3:</b> la gente <b>reenvía</b> pantallas de otros (Pato mandaba las suyas desde el teléfono de Fernando).</li>
+        <li><b>R4:</b> la pista casi nunca sale en la foto — se declara por semana, no se lee.</li>
+        <li><b>R5:</b> la consola está en español; el prompt lo asume.</li>
+      </ul>
+      <p class="note">Cada foto que el modelo leyó mal se convirtió en un caso de prueba (un "eval") con la respuesta correcta. El lector se corre contra ese banco antes de tocar el prompt: si una mejora rompe un caso viejo, se nota al instante. Precisión medida sobre el histórico real: ~92% de lecturas correctas sin intervención.</p>
+    </li>
+    <li>
+      <b class="t">¿Quién es quién? Un mapa de remitentes</b>
+      Los personajes se repiten (hubo tres Toads en un mismo grupo del torneo); el remitente no. Un archivo plano mapea el identificador de WhatsApp de cada quien a su nombre en la tabla:
+      <pre>{"5218...@s.whatsapp.net": "Decr",
+ "5219...@s.whatsapp.net": "Jorge", ...}</pre>
+      Cuando escribe alguien nuevo, su foto se aparta y un comando (<code>map-sender</code>) lo da de alta y re-procesa sus fotos pendientes.
+    </li>
+    <li>
+      <b class="t">La compuerta: auto-aceptar lo claro, apartar lo dudoso</b>
+      La decisión de diseño más importante. El pipeline corre solo cada 30 minutos en modo <code>auto</code>: las lecturas con confianza alta se publican <b>sin preguntar</b>; las dudosas (borrosas, recortadas, remitente desconocido, campos faltantes) se van a una cola de "parqueados" con su razón, y ahí esperan a un humano:
+      <pre><span class="c"># ver la cola de dudosos</span>
+./pipeline/run-pipeline.sh parked
+<span class="c"># corregir a mano un tiempo que la visión no pudo leer</span>
+./pipeline/run-pipeline.sh enter --id 38235 --time 2:18.062
+<span class="c"># o quitar de la tabla algo que se aceptó mal</span>
+./pipeline/run-pipeline.sh remove --ids 37024</pre>
+      La filosofía es <b>publicar y corregir</b>, no pedir permiso para cada foto: la tabla siempre está viva y los errores (pocos) se arreglan con un comando. Todas las decisiones quedan en un ledger append-only donde la última palabra gana — así un item apartado puede re-entrar cuando su causa raíz se arregla, y el job automático nunca pisa una corrección humana (un lock evita que se interleaven).
+    </li>
+    <li>
+      <b class="t">Publicar: JSON → HTML estático → git push</b>
+      La "base de datos" es un archivo: <code>leaderboard.json</code> (la tabla), <code>roster.json</code> (los inscritos) y <code>weeks.json</code> (qué pista es cada semana):
+      <pre>[{"week": 8, "track": "Mount Wario"},
+ {"week": 7, "track": "Moo Moo Meadows"}, ...]</pre>
+      Un generador en Python convierte esos tres archivos en un <code>index.html</code> completo — CSS incluido, cero JavaScript de framework — y lo empuja a un repo de GitHub conectado a Cloudflare Pages. El push ES el deploy: ~30 segundos después está en línea. El generador es determinista (mismos datos → mismo HTML), así que solo se commitea cuando algo cambió de verdad.
+    </li>
+    <li>
+      <b class="t">Salud: una página de status diaria</b>
+      Otro job de launchd genera cada mañana a las 8:00 una página de salud del pipeline (<code>/status.html</code>): cuántas fotos llegaron, cuántas se leyeron, qué hay parqueado. Un vistazo de 10 segundos con el café dice si la máquina sigue viva — sin abrir una terminal.
+    </li>
+    <li>
+      <b class="t">El día del torneo: el mismo truco, operado en vivo</b>
+      El 25 de julio no hubo tiempo para pipelines: las páginas de <a href="/grupos">grupos y bracket</a> y de <a href="/resultados">resultados</a> se operaron <b>en vivo desde un teléfono</b>, con un agente (Claude Code en modo remoto) del otro lado: le mandabas la foto del proyector con las posiciones, leía los puntos de las barras de colores (las filas resaltadas son los humanos), editaba el bloque de datos dentro del HTML, hacía push y ~30 segundos después el bracket estaba actualizado para todos. Catorce publicaciones en una tarde — incluyendo un cambio de formato a media competencia — sin abrir la laptop.
+    </li>
+  </ol>
+
+  <h2>El stack completo</h2>
+  <table>
+    <thead><tr><th>Pieza</th><th>Qué es</th><th>Por qué esta</th></tr></thead>
+    <tbody>
+      <tr><td class="k">WhatsApp</td><td>La fuente de datos</td><td class="why">Donde la familia ya estaba. Participar = mandar una foto.</td></tr>
+      <tr><td class="k">launchd</td><td>El cron de macOS</td><td class="why">Dos jobs de 30 min (laptop y servidor) + el status diario. Cero infraestructura nueva.</td></tr>
+      <tr><td class="k">rsync</td><td>Transporte laptop → servidor</td><td class="why">Incremental, reintentable, aburrido en el buen sentido.</td></tr>
+      <tr><td class="k">Python + pytest</td><td>Pipeline, resolver, generador</td><td class="why">Componentes chicos con contratos JSON entre sí; ~150 tests en verde antes de cada cambio.</td></tr>
+      <tr><td class="k">Claude API (visión)</td><td>El lector de pantallas</td><td class="why">Lee JSON estructurado de una foto de un proyector, en español, con reglas raras (R1–R5).</td></tr>
+      <tr><td class="k">Banco de evals</td><td>Fotos reales + respuesta correcta</td><td class="why">Cada error se vuelve examen. El prompt solo mejora si pasa todo el banco.</td></tr>
+      <tr><td class="k">JSON plano</td><td>La "base de datos"</td><td class="why">Legible, diffeable, respaldable con cp. A esta escala, una DB solo estorba.</td></tr>
+      <tr><td class="k">git + GitHub</td><td>Historial y transporte de deploy</td><td class="why">Cada publicación es un commit: auditable y reversible.</td></tr>
+      <tr><td class="k">Cloudflare Pages</td><td>Hosting</td><td class="why">Estático, gratis, dominio propio, redeploy automático en cada push.</td></tr>
+      <tr><td class="k">HTML/CSS a mano</td><td>Todas las páginas</td><td class="why">Sin frameworks ni build. La página del bracket es un HTML con un bloque de datos editable adentro.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Si quieres armar el tuyo</h2>
+  <p class="lead">Nada de esto es específico de Mario Kart. La receta general, en orden:</p>
+  <ol class="steps">
+    <li><b class="t">Empieza por el chat que ya existe</b> No pidas a nadie instalar nada ni llenar formularios. Tu fuente de datos es el grupo donde tu gente ya comparte fotos.</li>
+    <li><b class="t">Haz que las fotos caigan en una carpeta con manifiesto</b> Como sea que las saques (export, script, a mano al principio), el contrato es simple: una carpeta de imágenes + un JSONL con remitente y fecha por imagen. Todo lo demás se cuelga de eso.</li>
+    <li><b class="t">Ponle un lector de visión con salida JSON</b> Prompt que pide campos concretos + nivel de confianza. Y la parte que nadie te cuenta: corrige sus errores a mano las primeras semanas y convierte cada error en un caso de prueba. Las 5 reglas que harán tu sistema confiable solo viven en TUS fotos.</li>
+    <li><b class="t">Separa identidad de contenido</b> Quién manda la foto es un dato del chat; qué dice la foto es un dato del modelo. Un mapita remitente→persona te salva de todos los "en la pantalla dice Toad".</li>
+    <li><b class="t">Construye la compuerta antes que el dashboard</b> Auto-acepta con confianza alta, aparta lo demás en una cola con razón, y dale al humano 3 comandos: ver, corregir, quitar. Publicar-y-corregir le gana a aprobar-cada-cosa desde el día uno.</li>
+    <li><b class="t">Genera HTML estático desde JSON y despliega con git push</b> Un script que lee tus JSON y escupe una página completa. GitHub + Cloudflare Pages (o Netlify, o GitHub Pages) hacen el resto gratis. Si tu página necesita datos en vivo, pon los datos como bloque editable dentro del HTML — editar + push es tu "backend".</li>
+    <li><b class="t">Programa dos crons y una página de status</b> Uno que bombea, uno que procesa, y una página diaria que te diga que siguen vivos. Si el status está verde, no abres la terminal.</li>
+  </ol>
+  <p class="note">Escala real de este proyecto: un grupo de ~40 personas, ~150 fotos en 8 semanas, un servidor casero, y un costo de API de centavos por semana. Todo el código son componentes chicos de Python con contratos JSON entre sí — ninguna pieza sabe de las demás más que su archivo de entrada y de salida.</p>
+
+  <div class="tldr" style="margin-top:36px">
+    <b>Los cinco principios, si solo te llevas algo:</b> estático &gt; servidor · JSON plano &gt; base de datos · publica-y-corrige &gt; aprueba-cada-cosa · los errores del modelo son tus mejores tests · deja al humano exactamente lo dudoso, ni más ni menos.
+  </div>
+
+  <footer>
+    <p>⏱️ <a href="/">La tabla de las 8 semanas</a> · 📋 <a href="/torneo">Las reglas del torneo</a> · 👥 <a href="/grupos">Grupos y bracket</a> · 🏆 <a href="/resultados">Resultados finales</a></p>
+    <p>Hecho en casa, con cariño y con launchd. 🏁</p>
+  </footer>
+</div>
+
+</body>
+</html>

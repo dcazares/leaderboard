@@ -21,7 +21,7 @@
     position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
     background:rgba(11,16,32,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   }
-  .nwrap{max-width:760px;margin:0 auto;padding:10px 20px;display:flex;gap:8px;align-items:center}
+  .nwrap{max-width:760px;margin:0 auto;padding:10px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .brand{font-size:.9rem;color:var(--muted);white-space:nowrap}
   .brand b{color:var(--ink)}
   .nspace{flex:1}
@@ -117,9 +117,11 @@
   <div class="nwrap">
     <span class="brand">🏁 <b>Torneo MK8</b> · sáb 25</span>
     <span class="nspace"></span>
+    <a href="/">Tabla</a>
     <a href="/torneo" class="on" aria-current="page">Reglas</a>
-    <a href="/grupos">Grupos y bracket</a>
+    <a href="/grupos">Grupos</a>
     <a href="/resultados">Resultados</a>
+    <a href="/arquitectura">Cómo funciona</a>
   </div>
 </nav>
 <div class="checker"></div>
@@ -197,8 +199,7 @@
   </section>
 
   <footer>
-    <p>⏱️ La semana 8 (<b>Mount Wario</b>) cierra el mismo sábado 25 — última chance de subir tiempo y presumir en la <a href="https://mk8tabla2026.decrgandalf.com">tabla de posiciones</a> antes del torneo.</p>
-    <p>👥🏁 <a href="/grupos">Los grupos y el bracket en vivo</a></p>
+    <p>⏱️ <a href="/">La tabla de las 8 semanas</a> · 👥 <a href="/grupos">Grupos y bracket</a> · 🏆 <a href="/resultados">Resultados finales</a> · ⚙️ <a href="/arquitectura">Cómo funciona todo esto</a></p>
   </footer>
 </div>
 
